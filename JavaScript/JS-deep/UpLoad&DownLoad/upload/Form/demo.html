@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../comment.css"/>
+		<script type="text/javascript" src="../lib/jquery-2.2.1.js"></script>
+		<style type="text/css">
+			a {
+				color: #50a3ba;
+				text-decoration: none;
+				font-size: 16px;
+			}
+			#result {
+				color:#e4393c ;
+				margin-top: 50px;
+			}			
+			.filePicker{
+        width: 160px;
+        height: 44px;
+        line-height: 44px;
+        text-align: center;
+        color: #fff;
+        background: #00b7ee;  
+        margin: 15px 0;      
+      }
+      .filePicker input[type="file"] {
+        position: relative;
+        top: -44px;
+        left: 0px;
+        width: 160px;
+        height: 44px;
+        opacity: 0;
+        cursor: pointer;
+        overflow: hidden;
+        z-index: 0;
+      }
+      input[type="file"] {
+        position: relative;
+        top: -44px;
+        left: 0px;
+        width: 160px;
+        height: 44px;
+        opacity: 0;
+        cursor: pointer;
+        overflow: hidden;
+        z-index: 0;
+      }
+      input[type='submit'] {
+      	cursor: pointer;
+      	text-align: center;
+        color: #fff;
+        background: #76ab00; 
+        border: 1px solid #76ab00;
+        padding: 6px 12px;
+      }
+      .show-file {
+      	margin: 15px;
+      	color: #E4393C;
+      }
+		</style>
+	</head>
+	<body>
+		<div class='demo-box'>
+			<div class="demo-content">
+				<div class='demo-list'>
+					<h4>Form表单</h4>
+				　<form id="upload-form" action="http://ui.baifendian.com/upload.do" onsubmit="return handleSubmit(this)" method="post" enctype="multipart/form-data" >
+						<div class="filePicker">
+	            <label>点击选择文件</label>
+	            <input id="fileInput1" type="file" name="files" multiple="multiple">
+	          </div>
+		　　　　	<input type="submit" value="上传" />
+			　　</form>
+					<div id='showFile1' class='show-file'></div>
+					<p id='precent'></p>
+				</div>
+				<div class='demo-list'>
+					<h4>Input</h4>
+					<div class="filePicker">
+            <label>点击选择文件</label>
+            <input id="fileInput2" type="file" name="files" multiple="multiple" accept="image/*">
+          </div>
+          <div id='showFile2' class='show-file'></div>          
+				</div>
+				<div id='result'></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var fileInput1 = document.getElementById("fileInput1");
+		var fileInput2 = document.getElementById("fileInput2");
+		fileInput2.addEventListener('change', function(event) {
+	    var file = fileInput2.files[0];
+	    // 或file = fileInput2.files.item(0);
+	    console.log(file);
+	    document.getElementById('showFile2').innerHTML= file.name
+		}, false);
+		
+		fileInput1.addEventListener('change', function(event) {
+	    var file = fileInput1.files[0];
+	    // 或file = fileInput1.files.item(0);
+	    console.log(file);
+	    document.getElementById('showFile1').innerHTML= file.name
+		}, false);
+		
+		(function addXhrProgressEvent($) {
+		    var originalXhr = $.ajaxSettings.xhr;
+		    $.ajaxSetup({
+		        progress: function() { console.log("standard progress callback"); },
+		        xhr: function() {
+		            var req = originalXhr(), that = this;
+		            if (req) {
+		                if (typeof req.addEventListener == "function") {
+		                    req.addEventListener("progress", function(evt) {
+		                        that.progress(evt);
+		                    },false);
+		                }
+		            }
+		            return req;
+		        }
+		    });
+		})(jQuery);
+		
+		//https://developer.mozilla.org/zh-CN/docs/Web/API/FormData/Using_FormData_Objects:参考网址
+		
+		function handleSubmit(_this) {
+			var form = $(_this);
+			// mulitipart form,如文件上传类
+			
+			var formData = new FormData();
+			formData.append('files', $('#fileInput1')[0].files[0]);
+//    var formData = new FormData(form[0]);
+      $.ajax({
+        type: form.attr('method'),
+        url: form.attr('action'),
+        data: formData,
+        mimeType: "multipart/form-data",
+        contentType: false,
+        cache: false,
+        processData: false,
+        progress:function(evt) {
+          var loaded = evt.loaded
+          var tot = evt.total 
+          var per = Math.floor(100 * loaded / tot) // 已经上传的百分比
+          document.getElementById('precent').innerHTML= '上传成功 '+ per + '%'
+       	}
+      }).success(function (res) {
+        //成功提交
+        console.log(res)
+        document.getElementById('result').innerHTML= '上传成功'
+      }).error(function (jqXHR, textStatus, errorThrown) {
+        //错误信息
+        document.getElementById('result').innerHTML= '上传失败'
+      });
+      
+      return false;
+		}
+	</script>
+</html>

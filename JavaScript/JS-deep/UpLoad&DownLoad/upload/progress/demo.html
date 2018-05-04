@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../lib/jquery-2.2.1.js"></script>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//https://www.w3ctrain.com/2015/07/11/uploading-image-with-ajax/ 参考网址
+		$.ajax({
+		  xhr: function()
+		  {
+		    var xhr = new window.XMLHttpRequest();
+		    
+		    //Upload progress
+		    xhr.upload.addEventListener("progress", function(evt){
+		      if (evt.lengthComputable) {
+		        var percentComplete = evt.loaded / evt.total;
+		        //Do something with upload progress
+		        console.log(percentComplete);
+		      }
+		    }, false);
+		    
+		    //Download progress
+		    xhr.addEventListener("progress", function(evt){
+		      if (evt.lengthComputable) {
+		        var percentComplete = evt.loaded / evt.total;
+		        //Do something with download progress
+		        console.log(percentComplete);
+		      }
+		    }, false);
+		    return xhr;
+		  },
+		  type: 'POST',
+		  url: "/",
+		  data: {},
+		  success: function(data){
+		    //Do something success-ish
+		  }
+		});
+		//以上代码需要jQuery版本1.5.1以上支持。如果需要兼容老版本的IE(IE6/IE5)，则需要把XMLHttpRequest替换成ActiveXObject对象。
+		
+		//简单封装
+		(function addXhrProgressEvent($) {
+		    var originalXhr = $.ajaxSettings.xhr;
+		    $.ajaxSetup({
+		        progress: function() { console.log("standard progress callback"); },
+		        xhr: function() {
+		            var req = originalXhr(), that = this;
+		            if (req) {
+		                if (typeof req.addEventListener == "function") {
+		                    req.addEventListener("progress", function(evt) {
+		                        that.progress(evt);
+		                    },false);
+		                }
+		            }
+		            return req;
+		        }
+		    });
+		})(jQuery);
+		 
+		$.ajax({
+		    url: "./json.js",
+		    type: "GET",
+		    dataType: "json",
+		    complete: function() { console.log("Completed."); },
+		    progress: function(evt) {
+		        if (evt.lengthComputable) {
+		            console.log("Loaded " + parseInt( (evt.loaded / evt.total * 100), 10) + "%");
+		        }
+		        else {
+		            console.log("Length not computable.");
+		        }
+		    }
+		});
+	</script>
+</html>

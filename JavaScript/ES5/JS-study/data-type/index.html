@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>JS——数据类型</title>
+	</head>
+	<body>
+		<h3>
+			js-数据类型
+		</h3>
+	</body>
+	<script type="text/javascript">
+		//null,underfined
+		console.log(null == undefined) //true
+		console.log(null === undefined) //false
+		
+		//Number		
+		console.log(0.05 + 0.25 == 0.3) //true
+		console.log(0.15 + 0.15 == 0.3) //true
+		console.log(0.1 + 0.2 == 0.3) //false
+		console.log(parseInt(0.1 + 0.2 - 0.3 === 5)) // true
+		console.log(NaN == NaN) //false
+		console.log(isNaN(NaN)) //true
+		
+		var maxNum = Number.MAX_VALUE;
+		var minNum = Number.MIN_VALUE;
+		console.log(isFinite(maxNum)) // false
+		
+		//数值转换
+		Number(undefined)
+		//NaN
+		Number(NaN)
+		//NaN
+		Number(null)
+		//0
+		
+		Number('') //0
+		
+		Object.prototype.toString.call([])    // "[object Array]"
+		Object.prototype.toString.call({})    // "[object Object]"
+		Object.prototype.toString.call(2)    // "[object Number]"
+		Object.prototype.toString.call(null) // "[object Null]"
+		Object.prototype.toString.call(undefined) // "[object Undefined]"
+		
+		
+		//转换
+		var num = 10,
+				bol = true;
+		console.log(num.toString()) //10
+		console.log(num.toString(2)) //1010
+		console.log(num.toString(8)) //12
+		console.log(num.toString(16)) // 'a'
+		console.log(bol.toString()) //'true'
+		
+		console.log(String(num))
+		console.log(String(bol))
+		console.log(String(null)) // 'null'
+		console.log(String(undefined)) //'undefined'
+		
+		//终极大法  str + ""
+		
+		//	null,undefined 不具备toString()
+		
+		
+	</script>
+</html>

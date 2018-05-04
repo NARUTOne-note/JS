@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../comment.css"/>
+		<style type="text/css">
+			a {
+				color: #50a3ba;
+				text-decoration: none;
+				font-size: 16px;
+			}
+			#result {
+				color:#e4393c ;
+				margin-top: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class='demo-box'>
+			<div class="demo-content">
+				<a href="javascript:;" onClick='downLoad()'>下载测试</a>
+				<div id='result'></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		function downLoad () {
+			var isSure=confirm("是否下载")
+		  if (isSure){
+		  	var form = document.createElement('form');   //定义一个form表单
+			 	form.style = 'display:none';   //下面为在form表单中添加查询参数
+			 	form.target = '';
+			 	form.method = 'GET';
+			 	form.action = 'https://github.com/WZOnePiece/study-draggable/archive/master.zip';//下载接口
+			
+			 	var input1 = document.createElement('input'); 
+			 	input1.type = 'hidden';
+			 	input1.name = 'exportData';
+			 	input1.value = (new Date()).getMilliseconds(); 
+			
+			 	document.body.appendChild(form)  //将表单放置在web中
+			 	form.appendChild(input1);   //将查询参数控件提交到表单上
+			 	form.submit();   //表单提交
+		    document.getElementById('result').innerHTML = "You downLoad OK!"
+		  }
+		  else{
+		    document.getElementById('result').innerHTML = "You pressed Cancel!"
+		  }
+		}
+		
+	</script>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+	<head>
+		<meta charset="UTF-8">
+		<title>demo</title>
+		<link rel="stylesheet" type="text/css" href="./comment.css"/>
+		<style type="text/css">
+			.demo-div {
+				width: 200px;
+				height: 200px;
+				padding: 20px;
+				margin: 30px;
+				overflow-y: scroll;
+			}
+			.demo-div p {
+				margin: 15px;
+			}
+			.div-content {
+				box-sizing: content-box;
+				border: 1px solid #50A3BA;
+			}
+			.div-padding {
+				box-sizing: padding-box;
+				border: 1px solid #E4393C;
+			}
+			.div-border {
+				box-sizing: border-box;
+				border: 1px solid #56351e;
+			}
+		</style>
+	</head>
+	<body ng-controller='myCtrol'>
+		<div class="demo-box">
+			<div class="demo-content">
+				<h2>总览</h2>
+				<div>
+					<table>
+						<thead>
+							<tr>
+								<th>类别</th>
+								<th>总高度</th>
+								<th>总宽度</th>
+								<th>可视高度</th>
+								<th>可视宽度</th>
+								<th>其他高度</th>
+								<th>其他宽度</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat = 'item in result'>
+								<td class='table-warn'>
+									{{item.type}}
+								</td>
+								<td>
+									{{item.height}}
+								</td>
+								<td>
+									{{item.width}}
+								</td>
+								<td>
+									{{item.visHeight}}
+								</td>
+								<td>
+									{{item.visWidth}}
+								</td>
+								<td>
+									{{item.otherHeight}}
+								</td>
+								<td>
+									{{item.otherWidth}}
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class='div-content demo-div'>
+					<ul>
+						<li>clientWidth: {{contentDiv.clientWidth}}</li>
+						<li>clientHeight: {{contentDiv.clientHeight}}</li>
+						<li>offsetWidth: {{contentDiv.offsetWidth}}</li>
+						<li>offsetHeight: {{contentDiv.offsetHeight}}</li>
+						<li>clientTop: {{contentDiv.clientTop}}</li>
+						<li>clientLeft: {{contentDiv.clientLeft}}</li>
+						<li>offsetLeft: {{contentDiv.offsetLeft}}</li>
+						<li>offsetTop: {{contentDiv.offsetTop}}</li>
+						<li>scrollWidth: {{contentDiv.scrollWidth}}</li>
+						<li>scrollHeight: {{contentDiv.scrollHeight}}</li>
+					</ul>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+					<p>这是一段占位文字</p>
+				</div>
+				<div class='div-padding demo-div'></div>
+				<div class='div-border demo-div'></div>
+			</div>
+		</div>
+	</body>
+	<script src="angular.js" type="text/javascript" charset="utf-8"></script>
+	<script src="app.js" type="text/javascript" charset="utf-8"></script>
+</html>

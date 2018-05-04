@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="div1"></div>
+		<button id="btn">点击</button>
+	</body>
+	<script type="text/javascript">
+		document.onclick = mouseClick;
+
+		function mouseClick(ev){
+		    ev = ev || window.event;//window.event用来兼容IE
+		    var x = 0; var y = 0;
+		
+		    if(ev.pageX){
+		        x = ev.pageX;
+		        y = ev.pageY;
+		    }else if(ev.clientX){
+		        var offsetX = 0 , offsetY = 0;
+		        if(document.documentElement.scrollLeft){
+		            offsetX = document.documentElement.scrollLeft;
+		            offsetY = document.documentElement.scrollTop;
+		        }else if(document.body){
+		            offsetX = document.body.scrollLeft;
+		            offsetY = document.body.scrollTop;
+		        }
+		        x = ev.clientX + offsetX;
+		        y = ev.clientY + offsetY;
+		    }
+		    alert("你点击的位置是 x="+ x + " y=" + y);
+		}
+		
+		window.onload=function(){
+    var oBtn=document.getElementById("btn");
+    var oDiv=document.getElementById("div1");
+
+    oBtn.onclick=function(){
+        //alert(oDiv.style.width); //写在样式表里无法读取，只能得到写在行内的
+        //alert(getComputedStyle(oDiv).width); //适用于标准浏览器       IE6、7、8不识别
+        //alert(oDiv.currentStyle.width); //适用于IE浏览器，标准浏览器不识别
+        if(oDiv.currentStyle){
+            alert(oDiv.currentStyle.width);
+        }else{
+            alert(getComputedStyle(oDiv).width);
+        }
+    };
+    
+    //浏览器窗口的大小
+		//  实用的 JavaScript 方案（涵盖所有浏览器）：
+		var w=window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+		
+		var h=window.innerHeight || document.documentElement.clientHeight|| document.body.clientHeight;
+		//对于 IE 6、7、8的方案如下：
+		document.documentElement.clientHeight
+		document.documentElement.clientWidth
+		//或者
+		document.body.clientHeight
+		document.body.clientWidth
+		
+//		禁止选取网页内容
+//		问题：  
+//		FF需要用CSS禁止，IE用JS禁止  
+//		
+//		解决方法：  
+//		IE: obj.onselectstart = function() {return false;}  
+//		FF: -moz-user-select:none;   
+};
+	</script>
+</html>

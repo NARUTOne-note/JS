@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../comment.css"/>
+		<style type="text/css">
+			#result {
+				color:#e4393c ;
+				margin-top: 50px;
+			}
+			ul li {
+				margin:10px;
+			}
+			button
+		</style>
+	</head>
+	<body>
+		<div class='demo-box'>
+			<div class="demo-content">
+				<ul>
+					<li><b>打开下载：</b><button onClick='downLoad()'>打开下载窗口</button></li>
+					<li><b>关闭下载：</b><button onClick='closeDownLoad()'>下载窗口关闭</button></li>					
+					<li><b>模拟a标签下载：</b><button onClick='AdownLoad()'>下载</button></li>					
+				</ul>
+				<div id='result'></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var new_window = null;
+		function downLoad () {
+			var isSure=confirm("是否下载")
+		  if (isSure){
+		  	new_window = window.open()
+		  	new_window.location.href = 'https://github.com/WZOnePiece/study-draggable/archive/master.zip';
+		    document.getElementById('result').innerHTML = "You downLoad OK!"
+		  }
+		  else{
+		    document.getElementById('result').innerHTML = "You pressed Cancel!"
+		  }
+		}
+		function closeDownLoad() {
+			new_window  && new_window.close();
+		}
+		
+		function AdownLoad() {
+			var url = 'https://github.com/WZOnePiece/study-draggable/archive/master.zip';
+			var a = document.createElement("a");
+	    a.setAttribute("href", url);
+	    a.setAttribute("target", "_blank");
+	    a.setAttribute("id", "camnpr");
+	    document.body.appendChild(a);
+	    a.click();
+		}
+		
+	</script>
+</html>

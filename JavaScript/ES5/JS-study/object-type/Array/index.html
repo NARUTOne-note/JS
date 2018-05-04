@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>array 学习</title>
+	<style type="text/css">
+		body {
+	    width: 896px;
+	    min-height: calc(100vh - 48px);
+	    margin: 0 auto;
+	    padding: 24px 16px;
+	    background: #fefefe;
+	    color: rgb(60,60,60);
+	    -webkit-text-size-adjust: 100%;
+	  }
+		script {
+			display: block;
+	    white-space: pre;
+	    text-shadow: none;
+	    background: #333;
+	    border-radius: 6px;
+	    color: #fff;
+	    font-family: monaco, courier, monospace;
+	    padding: 10px;
+	    margin-top: 16px;
+	    /*
+	    max-height: 60vh;
+	    overflow-y: auto;*/
+		}
+		script::before {
+		  content: 'Code:';
+		  color: #0f0;
+		}
+	</style>
+</head>
+<body>
+	<h3>Array 类型</h3>
+
+	<script type="text/javascript">
+		/*
+			Array 基础篇
+		*/
+
+		/**
+			创建数组
+			1、Array
+			2、字面量 []
+		*/
+		(function() {
+			var arr = new Array();
+			var arr0 = new Array(3);
+			var arr1 = new Array('a','b');
+
+			console.log(arr);
+			console.log(arr0);
+			console.log(arr1);
+
+			arr = [];
+			arr1 = ['a', 'b'];
+
+			//索引index获值
+			console.log(arr[0]);
+			console.log(arr1[0]);
+
+			//加长
+			arr1[3] = 'd';
+			console.log(arr1); //["a", "b", undefined × 1, "d"]
+			console.log(arr1.length); //4 
+
+			// length 特性 , 移除/添加数组项
+			arr1.length = 3;
+			arr.length = 1;
+
+			console.log(arr);
+			console.log(arr1);
+
+			arr1[arr1.length - 1] = 'c';
+			console.log(arr1); 
+
+			//检测数组
+
+			console.log(arr1 instanceof Array);
+			console.log(Array.isArray(arr1));
+			
+			//字符串转换 toString(), 逗号分隔；直接加长[]及length关系
+			console.log(arr1);
+			arr1[5] = 1;
+			console.log(arr1.toString());
+			console.log(arr1.valueOf());
+			console.log(arr1.join(','));
+			console.log(arr1.join());
+			alert(arr1);
+		})()
+		
+	</script>
+	<script type="text/javascript">
+		/*
+			Array 栈方法 
+			LIFO 后进先出， 顶部发生
+
+			push() , pop() 数组尾部
+		*/
+		(function() {
+			var arr = new Array();
+			arr.push('1', '2');
+			console.log(arr);
+
+			var item = arr.pop();
+			console.log(item);
+		})();
+
+		/*
+			Array 队列方法（排队）
+			FIFO 先进先出
+
+			push() , shift()
+		*/
+
+		(function() {
+			var arr = new Array();
+			arr.push('1', '2');
+			arr[arr.length] = 3;
+
+			var item = arr.shift();
+			console.log(item);
+
+			// unshift() 数组前端压入
+
+			var len = arr.unshift('0');
+			console.log(arr);
+			console.log(len);
+		})();
+
+		/*
+			重排序方法
+			reverse() , 翻转
+			sort(), 排序 , toString()比较字符串顺序
+		*/
+
+		(function() {
+			var arr = [2, 1, 3, 4, 6, 9, 10];
+			var arr_str = ['a', 'c', 'b', 'e', 'd'];
+
+			console.log(arr.reverse());
+			console.log(arr_str.reverse());
+
+			console.log(arr.sort());
+			console.log(arr_str.sort());
+
+			//比较器 compare(a,b), 数据类型
+			function compare (a, b) {// 小 到 大, 升序
+				if(a - b < 0) {
+					return -1
+				}
+				else if(a - b > 0) {
+					return 1
+				}
+				else {
+					return 0
+				}
+			}
+
+			console.log(arr.sort(compare));
+
+		})();
+
+	</script>
+	<script type="text/javascript">
+		/*
+		* Array数组的 操作方法
+		* 对数组进行 CRUD
+		*/
+
+		// 连接， concat
+
+		(function() {
+			var arr = [1, 2, 3, 4];
+			var arr1 = [5];
+
+			var result = arr.concat('0', arr1);
+			console.log(result);
+		})();
+
+		//数组截取, slice (不影响原数组)；出现负数，负数加数组长度取，如果end < start 返回 []
+		// 含头含尾
+
+		(function() {
+			var arr = [1, 2, 3, 4, 5, 6]
+
+			console.log(arr.slice(1))
+			console.log(arr.slice(1, 3))
+			console.log(arr.slice(-1, 3))
+			console.log(arr.slice(-1, -3))
+			console.log(arr.slice(-3, -1))
+
+		})();
+
+		/*
+		 删、插、替， splice; 改变原数组，返回操作值
+		*/ 
+
+		(function() {
+			var arr = [0, 1, 2, 3, 4, 5, 6]
+
+			//删除 splice(end, start), 含头不含尾
+
+			var del = arr.splice(0, 2);
+			console.log(arr)
+
+			//插入 splice(start, length(删除数), item1, item2, ...)
+
+			var insert = arr.splice(0, 0, 'a', 'b');
+			console.log(arr)
+
+			//替换 splice(start, length(删除数，不为0), item1, item2, ...)
+
+			var add = arr.splice(0, 1, 'c');
+			console.log(arr)
+
+			console.log(del)
+			console.log(insert)
+			console.log(add)
+
+		})();
+
+		/*
+			位置查找, 返回位置 未找到 -1；查找项 全等 ===
+			indexOf(index, item), 从前往后 ——>找，起始位置index， 查找项 item
+			lastIndexOf(index, item), 从后往前 <—— 找，起始位置index， 查找项 item
+
+			找到即返回
+		*/
+
+		(function(){
+			var arr = [1, 2, 3, 4, 5, 4, 6];
+
+			console.log(arr.indexOf(4));
+			console.log(arr.lastIndexOf(4));
+			
+		})();
+
+	</script>
+	<script type="text/javascript">
+		/*
+			数组迭代
+			every(): array 每一项执行函数，都返回true 则返回true
+			filter(): 过滤每一项，获取返回true的项组成的数组
+			forEach(): 获取每一项，运行函数，无返回, 不改变原数组
+			map(): 每一项运行函数，返回每一项运行后的组合数组
+			some(): 与every()相反，有返回true项，则返回true 
+		*/
+
+		// every((item, [i, array]) => {}) ; some()
+		
+		(() => {
+			var arr = [1, 2, 3, 4, 5, 6];
+
+			var bol = arr.every((item, i) => {
+				return item > 2;
+			});
+
+			var bol1 = arr.some((item, i) => {
+				return item > 2;
+			});
+
+			console.log(bol); // false
+			console.log(bol1); // true
+
+		})();
+
+		// filter((item, [i, array]) => {})
+
+		(() => {
+			var arr = [1, 2, 3, 4, 5, 6];
+
+			var result = arr.filter((item, i) => {
+				return item > 3
+			});
+
+			console.log(result);
+
+		})();
+
+		// map(), forEach
+
+		(() => {
+			var arr = [1, 2, 3, 4, 5, 6];
+
+			var result = arr.map((item, i) => {
+				return item * 2 + 2;
+			})
+
+			arr.forEach((item, i) => {
+				item = item * 2;
+			});
+
+			console.log(result);
+			console.log(arr);
+
+		})();
+
+	</script>
+
+	<script type="text/javascript">
+		/*
+			归并
+			reduce((prev, cur, index, array))
+			reduceRight()方向相反与 reduce() 
+		*/
+
+		(() => {
+			var arr = [1, 2, 3, 4, 5, 6];
+
+			var result = arr.reduce((prev, cur, index) => {
+				return prev + cur
+			})
+
+			console.log(result);
+		})();
+
+	</script>
+</body>
+</html>

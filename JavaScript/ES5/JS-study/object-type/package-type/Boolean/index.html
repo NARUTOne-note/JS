@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>包装类型-Boolean</title>
+	<style type="text/css">
+		body {
+	    width: 896px;
+	    min-height: calc(100vh - 48px);
+	    margin: 0 auto;
+	    padding: 24px 16px;
+	    background: #fefefe;
+	    color: rgb(60,60,60);
+	    -webkit-text-size-adjust: 100%;
+	  }
+		script {
+			display: block;
+	    white-space: pre;
+	    text-shadow: none;
+	    background: #333;
+	    border-radius: 6px;
+	    color: #fff;
+	    font-family: monaco, courier, monospace;
+	    padding: 10px;
+	    margin-top: 16px;
+	    /*
+	    max-height: 60vh;
+	    overflow-y: auto;*/
+		}
+		script::before {
+		  content: 'example code:';
+		  color: #0f0;
+		}
+	</style>
+</head>
+<body>
+	<h3>包装类型——Boolean</h3> 
+	<script type="text/javascript">
+		/**
+		 * Boolean 对象
+		 */
+		
+		(function() {
+			var bolObj = new Boolean(false);
+
+			var bol = bolObj && true;
+
+			console.log(bol); //true 
+			console.log(typeof bolObj); // 'object'
+			console.log(typeof bol); // 'boolean'
+			console.log(bolObj instanceof Boolean); // true
+			console.log(bol instanceof Boolean); // false
+		})();
+	</script>
+</body>
+</html>

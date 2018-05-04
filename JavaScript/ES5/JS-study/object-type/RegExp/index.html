@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>RegExp 学习</title>
+	<style type="text/css">
+		body {
+	    width: 896px;
+	    min-height: calc(100vh - 48px);
+	    margin: 0 auto;
+	    padding: 24px 16px;
+	    background: #fefefe;
+	    color: rgb(60,60,60);
+	    -webkit-text-size-adjust: 100%;
+	  }
+		script {
+			display: block;
+	    white-space: pre;
+	    text-shadow: none;
+	    background: #333;
+	    border-radius: 6px;
+	    color: #fff;
+	    font-family: monaco, courier, monospace;
+	    padding: 10px;
+	    margin-top: 16px;
+	    /*
+	    max-height: 60vh;
+	    overflow-y: auto;*/
+		}
+		script::before {
+		  content: 'example code:';
+		  color: #0f0;
+		}
+	</style>
+</head>
+<body>
+	<h3>RegExp 学习</h3>
+	<script type="text/javascript">
+		/*
+			RegExp
+			表达式字面量 /rex/igm
+			regexp表达式  new RegExp('rex', 'igm')
+		*/
+
+		(() => {
+			var reg = null;
+			var str = 'catsdjflsdl';
+
+			for(let i = 0; i < 10; i++) {
+				reg = /cat/g;
+				console.log(reg.test(str)); // es3会出bug,为同一个RegExp实例
+			}
+
+			for(let i = 0; i < 10; i++) {
+				reg = new RegExp('cat', 'g');
+				console.log(reg.test(str));
+			}
+
+		})();
+	
+		(() => {
+
+			// RegExp 属性
+			var reg1 = /\[bc\]at/ig;
+
+			var reg2 = new RegExp('\\[bc\\]at', 'i');
+
+			console.log(reg1.global);
+			console.log(reg1.ignoreCase);
+			console.log(reg1.multiline);
+			console.log(reg1.lastIndex);
+			console.log(reg1.source);
+
+			console.log(reg2.source);
+
+		})();
+
+		/*
+			RegExp 实例方法
+			捕获：exec()
+			检测：test() 
+		*/
+
+		(() => {
+			var str = ' mom and dad and children ';
+			var reg = /.nd/;
+
+			var matches = reg.exec(str);
+
+			console.log(matches) // ["and", index: 5, input: " mom and dad and children "]
+
+			var reg1 = /.nd/g;
+			var matches1 = reg1.exec(str);
+
+			console.log(matches1); //就算有g,也返回一个查找项；但是可以多次调用exec获取
+			var matches2 = reg1.exec(str);
+			console.log(matches2) // ["and", index: 13, input: " mom and dad and children "]
+
+			// test() 测试
+
+			console.log(reg.test(str))
+
+			//继承实例方法
+
+			console.log(reg1.toString()) // '/.nd/g'
+			console.log(reg1.toLocaleString()) // '/.nd/g'
+			console.log(reg.valueOf()) //  /.nd/(正则)
+
+		})();
+
+		(() => {
+			// RegExp 构造函数属性
+
+			var str = 'this has been a short summer';
+			var reg = /(..)or(.)/g;
+
+			if(reg.test(str)) {
+				console.log(RegExp.$1) // sh
+				console.log(RegExp.$2) // t
+			}
+
+		})();
+
+	</script>
+</body>
+</html>

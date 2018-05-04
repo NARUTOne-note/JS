@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../comment.css"/>
+		<style type="text/css">
+			a {
+				color: #50a3ba;
+				text-decoration: none;
+				font-size: 16px;
+			}
+			#result {
+				color:#e4393c ;
+				margin-top: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class='demo-box'>
+			<div class="demo-content">
+				<a href="javascript:;" onClick='downLoad()'>下载测试</a>
+				<div id='result'></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		function downLoad () {
+			var isSure=confirm("是否下载")
+		  if (isSure){
+		  	var IFrameRequest=document.createElement("iframe");
+        IFrameRequest.id="IFrameRequest";
+        IFrameRequest.src="https://github.com/WZOnePiece/study-draggable/archive/master.zip";
+        IFrameRequest.style.display="none";
+        document.body.appendChild(IFrameRequest);
+		    document.getElementById('result').innerHTML = "You downLoad OK!"
+		  }
+		  else{
+		    document.getElementById('result').innerHTML = "You pressed Cancel!"
+		  }
+		}
+		
+	</script>
+</html>

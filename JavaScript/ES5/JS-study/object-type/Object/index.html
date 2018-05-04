@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>object类型</title>
+	<style type="text/css">
+		body {
+	    width: 896px;
+	    min-height: calc(100vh - 48px);
+	    margin: 0 auto;
+	    padding: 24px 16px;
+	    background: #fefefe;
+	    color: rgb(60,60,60);
+	    -webkit-text-size-adjust: 100%;
+	  }
+		script {
+			display: block;
+	    white-space: pre;
+	    text-shadow: none;
+	    background: #333;
+	    border-radius: 6px;
+	    color: #fff;
+	    font-family: monaco, courier, monospace;
+	    padding: 10px;
+	    margin-top: 16px;
+	    max-height: 60vh;
+	    overflow-y: auto;
+		}
+		script::before {
+		  content: 'Code:';
+		  color: #0f0;
+		}
+	</style>
+</head>
+<body>
+	<h3>引用类型 —— Object 类型</h3>
+	<script type="text/javascript">
+		/*
+			创建方式
+			1、new Object()
+			2、对象字面量表示：{} ,不会调用Object构造函数
+		*/
+		
+		var obj = new Object();
+		obj.name = 'NARUTOne';
+
+		var obj1 = {
+			name: 'NARUTOne'
+		};
+		obj1.age = 23;
+		
+		//作为参数传递
+
+		function buildPerson (info) {
+			var result = '';
+			if(typeof info.name == 'string') {
+				result += '姓名：' + info.name + '\n';
+			}
+
+			if(typeof info.age == 'number') {
+				result += '年龄：' + info.age;
+			}
+
+			return result;
+		}
+
+		var person = buildPerson({
+			name: 'NARUTOne',
+			age: 23
+		})
+
+		console.log(person)
+	</script>
+</body>
+</html>

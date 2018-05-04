@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>JS 函数</title>
+		<style type="text/css">
+			body {
+		    width: 896px;
+		    min-height: calc(100vh - 48px);
+		    margin: 0 auto;
+		    padding: 24px 16px;
+		    background: #fefefe;
+		    color: rgb(60,60,60);
+		    -webkit-text-size-adjust: 100%;
+		  }
+			script {
+				display: block;
+		    white-space: pre;
+		    text-shadow: none;
+		    background: #333;
+		    border-radius: 6px;
+		    color: #fff;
+		    font-family: monaco, courier, monospace;
+		    padding: 10px;
+		    margin-top: 16px;
+		    max-height: 60vh;
+		    overflow-y: auto;
+			}
+			script::before {
+			  content: 'Source:';
+			  color: #0f0;
+			}
+		</style>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/*
+		 *以下内容仅为学习测试所记，没有考虑运行 
+		 * 
+		 * */
+		//函数声明
+		function foo () {}
+		
+		//函数表达式
+		var foo = function() {}
+		var foo1 = function foo() {}
+		
+		var multiply = new Function('x', 'y', 'return x * y');
+		
+		//arguments
+		
+		function doAdd(num1, num2) {
+			if(arguments.length == 1) {
+				return (num1 + 10)
+			}
+			else if(arguments.length == 2) {
+				return (arguments[0] + num2)
+			}
+			else {
+				return null
+			}
+		}
+		
+		doAdd()
+		doAdd(10)
+		doAdd(10, 20)
+		
+		// 函数传参方式 ，值传递， 地址值
+		var v1 = []
+		var v2 = {};
+		var v3 = {};
+		function foo(v1, v2, v3)
+		{
+		    v1 = [1];
+		    v2 = [2];
+		    v3 = {a:3}
+		}
+		
+		foo(v1, v2, v3);
+		alert(v1); // 空白
+		alert(v2); // [object Object]
+		alert(v3.a); // undefined
+		
+		
+	// 下面2个括弧()都会立即执行，自执行
+	
+	(function () { /* code */ } ()); // 推荐使用这个
+	(function () { /* code */ })(); // 但是这个也是可以用的
+	
+	// 由于括弧()和JS的&&，异或，逗号等操作符是在函数表达式和函数声明上消除歧义的
+	// 所以一旦解析器知道其中一个已经是表达式了，其它的也都默认为表达式了
+	// 不过，请注意下一章节的内容解释
+	
+	var i = function () { return 10; } ();
+	true && function () { /* code */ } ();
+	0, function () { /* code */ } ();
+	
+	// 如果你不在意返回值，或者不怕难以阅读
+	// 你甚至可以在function前面加一元操作符号, 表达式自执行
+	
+	!function () { /* code */ } ();
+	~function () { /* code */ } ();
+	-function () { /* code */ } ();
+	+function () { /* code */ } ();
+	
+	// 还有一个情况，使用new关键字,也可以用，但我不确定它的效率
+	// http://twitter.com/kuvos/status/18209252090847232
+	
+	new function () { /* code */ }
+	new function () { /* code */ } () // 如果需要传递参数，只需要加上括弧()
+	
+	
+	//自执行
+	//这是一个自执行的函数，函数内部执行自身，递归
+		function foo() { foo(); }
+		
+		// 这是一个自执行的匿名函数，因为没有标示名称
+		// 必须使用arguments.callee属性来执行自己
+		var foo = function () { arguments.callee(); };
+		
+		// 这可能也是一个自执行的匿名函数，仅仅是foo标示名称引用它自身
+		// 如果你将foo改变成其它的，你将得到一个used-to-self-execute匿名函数
+		var foo = function () { foo(); };
+		
+		
+		//立即执行		
+		// 有些人叫这个是自执行的匿名函数（即便它不是），因为它没有调用自身，它只是立即执行而已。
+		(function () { /* code */ } ());
+		
+		// 为函数表达式添加一个标示名称，可以方便Debug
+		// 但一定命名了，这个函数就不再是匿名的了
+		(function foo() { /* code */ } ());
+		
+		// 立即调用的函数表达式（IIFE）也可以自执行，不过可能不常用罢了
+		(function () { arguments.callee(); } ());
+		(function foo() { foo(); } ());
+		
+		//匿名闭包
+		var elems = document.getElementsByTagName('a');
+
+		for (var i = 0; i < elems.length; i++) {
+		
+	    (function (lockedInIndex) {
+	
+	        elems[i].addEventListener('click', function (e) {
+	            e.preventDefault();
+	            alert('I am link #' + lockedInIndex);
+	        }, 'false');
+	
+	    })(i);
+		}
+		
+		//或
+		elems[i].addEventListener('click', (function (lockedInIndex) {
+        return function (e) {
+            e.preventDefault();
+            alert('I am link #' + lockedInIndex);
+        };
+    })(i), 'false');
+    
+    //应用
+    
+    var counter = (function () {
+		    var i = 0;
+		
+		    return {
+		        get: function () {
+		            return i;
+		        },
+		        set: function (val) {
+		            i = val;
+		        },
+		        increment: function () {
+		            return ++i;
+		        }
+		    };
+		} ());
+	</script>
+</html>

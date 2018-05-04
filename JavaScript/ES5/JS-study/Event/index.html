@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>JS-Event</title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			
+			body {
+				padding: 12px;
+			}
+			
+			div {
+				margin: 12px;
+				padding: 8px 12px;
+				border: 1px solid #efefef;
+			}
+		</style>
+	</head>
+	<body>
+		<!--第一种高度耦合绑定-->
+		<a href="javascript:;" onclick='foo(this)'>测试点击click</a>
+		<h3>window events</h3>
+		<div id='log'></div>
+		<h3>event object</h3>
+		<div id='list'></div>
+		<h3>默认事件&&事件元素本身</h3>
+		<a href="www.baidu.com" id='jump'>是否跳转呢？</a>
+		
+		<h3>事件代理</h3>
+		<div>
+			<ul id="resources">
+			  <li><a href="http://developer.mozilla.org">MDN</a></li>
+			  <li><a href="http://html5doctor.com">HTML5 Doctor</a></li>
+			  <li><a href="http://html5rocks.com">HTML5 Rocks</a></li>
+			  <li><a href="http://beta.theexpressiveweb.com/">Expressive Web</a></li>
+			  <li><a href="http://creativeJS.com/">CreativeJS</a></li>
+			</ul>
+			<div id='event-agent'></div>
+		</div>
+		<iframe width="100%" height="300" src="//jsfiddle.net/NARUTOne/thttqhc7/1/embedded/js,html,css,result/dark/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+	</body>
+	<script type="text/javascript">
+		function foo(event) {
+			console.log(event)
+		}
+		
+		//获取window事件
+		var log = document.getElementById('log'),
+    i = '', 
+		out = [];
+		for (i in window) {
+		  if ( /^on/.test(i)) { out[out.length] = i; }
+		}
+		log.innerHTML = out.join(', ');
+		
+		//事件对象
+		var list = document.getElementById('list'),
+		    out = '';
+		 
+		document.addEventListener('click', logeventinfo, false);
+		document.addEventListener('keypress', logeventinfo, false);
+		 
+		function logeventinfo (ev) {
+			console.log(ev)
+		  list.innerHTML = '';
+		  out = '<ul>';
+		  for (var i in ev) {
+		    if (typeof ev[i] === 'function' || i === i.toUpperCase()) {
+		      continue;
+		    }
+		    out += '<li><span>'+i+'</span>: '+ev[i]+'</li>';
+		  }
+		  list.innerHTML += out + '</ul>';
+		}
+		
+		//默认事件
+		
+		document.getElementById('jump').addEventListener('click', function(e) {
+			alert('会跳转到www.baidu.com？？？');
+			e.preventDefault();
+		}, false)
+		
+		//事件代理
+		
+		var resources = document.querySelector('#resources'),
+		    agent = document.querySelector('#event-agent');
+		 
+		resources.addEventListener('mouseover', showtarget, false);
+		 
+		function showtarget(ev) {
+		  var target = ev.target;
+		  if (target.tagName === 'A') {
+		    agent.innerHTML = 'A link, with the href:' + target.href;
+		  }
+		  if (target.tagName === 'LI') {
+		    agent.innerHTML = 'A list item';
+		  }
+		  if (target.tagName === 'UL') {
+		    agent.innerHTML = 'The list itself';
+		  }
+		}
+	</script>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>js 操作符</title>
+		<style type="text/css">
+			body {
+		    width: 896px;
+		    min-height: calc(100vh - 48px);
+		    margin: 0 auto;
+		    padding: 24px 16px;
+		    background: #fefefe;
+		    color: rgb(60,60,60);
+		    -webkit-text-size-adjust: 100%;
+		  }
+			script {
+				display: block;
+		    white-space: pre;
+		    text-shadow: none;
+		    background: #333;
+		    border-radius: 6px;
+		    color: #fff;
+		    font-family: monaco, courier, monospace;
+		    padding: 10px;
+		    margin-top: 16px;
+		    max-height: 60vh;
+		    overflow-y: auto;
+			}
+			script::before {
+			  content: 'Source:';
+			  color: #0f0;
+			}
+		</style>
+	</head>
+	<body>
+		<h3>js 操作符</h3>
+	</body>
+	<script>
+		// 递增、递减
+		var num1 = 2;
+		var num2 = 20;
+		
+		console.log(num1-- + num2);
+		console.log(num1 + num2);
+		
+		console.log(--num1 + num2);
+		console.log(num1 + num2);
+		
+		console.log(num1++ + num2);
+		console.log(num1 + num2);
+		
+		console.log(++num1 + num2);
+		console.log(num1 + num2);
+		
+		var str1 = '2';
+		var str2 = 'a';
+		str1 --;
+		str2 ++;
+		console.log(str1);
+		console.log(str2);
+		
+		
+		var o = {
+			valueOf: () => {
+				return -1;
+			}
+		}
+		var f = 1.1;
+		
+		f--;
+		o--;
+		console.log(f);
+		console.log(o);
+		
+		//按位非 ~ , 底层二进制非操作
+		var n = 23;
+		console.log(~n);
+		console.log(-n - 1);
+		
+		//按位与 & , 底层二进制与操作
+		var result = 25 & 3;
+		console.log(result);
+		
+		//按位或 |， 底层二进制或操作
+		var result = 25 | 3;
+		console.log(result);
+		
+		//按位异或 ^, 单1返1
+		result = 25 ^ 3;
+		console.log(result);
+		
+		//左移<< 
+		var oldValue = 2;
+		console.log(oldValue << 5)
+		
+		//右移>>
+		var oldValue = -64;
+		console.log(oldValue >> 5)
+		
+		//无符号右移 >>>, 真实的负数二进制
+		var oldValue = -64;
+		console.log(oldValue >>> 5)
+	</script>
+	
+	<script>
+		//逻辑操作符 ！ || && ！！
+		
+		!!NaN
+		!NaN && !!null
+		
+		0 || 1
+	</script>
+	<script>
+		//乘性操作符 * /
+		
+		2 * 5
+		
+		2 * -5
+		
+		2 * NaN
+		
+		2 * '23a' //NaN
+		
+		2 * '23' //46
+		
+		Infinity * 0 //NaN
+		
+		0 / 0
+		
+		console.log(1 / NaN) //NaN 
+		
+		Infinity / 2  //Infinity
+		
+		Infinity / Infinity  //NaN		
+		
+		//加性 操作符类似，但注意  字符串拼接
+		
+		5 + '2'   //'52'
+
+		console.log('sum:' + 2 + 5)
+		console.log('sum:' + (2 + 5))
+		
+		//注意减号 不一样规则
+		
+		5 - true  // 4
+		
+		NaN - 1 // NaN
+		
+		Boolean(NaN) - 1 // -1
+		
+		5 - ''  // 5
+		
+		5 - '2' // 3
+		
+		5 - null  // 5
+		
+		'23' - 1  //22
+		
+		'23a' - 0 // NaN		
+		
+	</script>
+	
+	<script>
+		/**
+		 * 关系操作符  ，> < >= <= 
+		 * @return , boolean
+		 */
+		
+		// 字符串比较， 依次比较两字符串，字符的字符编码值
+		
+		'Blank' < 'alphabet'  // true
+		
+		'23' < '3' //true
+		
+		// 字符串，数值比较， 转换为数值比较
+		'23' < 3 // false
+		
+		'a' < 3  //false 
+		
+		//NaN 比较， 任何与NaN比较都返回false
+		
+		/**
+		 * 相等 操作符
+		 * 
+		 * == , != : 先转换再比较
+		 * 
+		 * === , !== : 仅比较不转换
+		 */
+		
+		//相等，不相等  == !=
+		
+		null == undefined   // true
+		
+		NaN == NaN  // false 
+		
+		NaN != NaN //true
+		
+		true == 1 // true 
+		
+		null == 0 //false
+		
+		'3' == 3 //true 
+		
+		
+		//全等，全不等  ===  !==
+		
+		'3' === 3 //false
+		
+		null === undefined  //false
+		
+		
+		// 逗号操作符
+		
+		var num = 1, num2 = 2;
+		
+		var arr = (23, 0 , 1, null) //结果为最后一项  null 
+		
+		
+		// 赋值操作符
+		
+		num += 1 
+
+		//特殊
+
+		"" == 0
+
+		var str = ''
+		str == 0
+		
+	</script>
+	
+</html>

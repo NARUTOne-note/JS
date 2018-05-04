@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>基本的拖拽实现</title>
+    <link href="base.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="test" class="box">
+        拖拽对象
+    </div>
+    <div>
+        存在的问题，代码高度耦合<br />
+    </div>
+    <script>
+        
+        var dragObj = document.getElementById("test");
+        dragObj.style.left = "0px";
+        dragObj.style.top = "0px";
+
+        var mouseX, mouseY, objX, objY;
+        var dragging = false;
+
+        dragObj.onmousedown = function (event) {
+            event = event || window.event;
+
+            dragging = true;
+            dragObj.style.position = "relative";
+
+
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+            objX = parseInt(dragObj.style.left);
+            objY = parseInt(dragObj.style.top);
+        }
+
+        document.onmousemove = function (event) {
+            event = event || window.event;
+            if (dragging) {
+
+                dragObj.style.left = parseInt(event.clientX - mouseX + objX) + "px";
+                dragObj.style.top = parseInt(event.clientY - mouseY + objY) + "px";
+            }
+
+        }
+
+        document.onmouseup = function () {
+            dragging = false;
+        }
+    </script>
+</body>
+</html>

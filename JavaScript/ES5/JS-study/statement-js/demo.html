@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>JS语句</title>
+		<style type="text/css">
+			body {
+		    width: 896px;
+		    min-height: calc(100vh - 48px);
+		    margin: 0 auto;
+		    padding: 24px 16px;
+		    background: #fefefe;
+		    color: rgb(60,60,60);
+		    -webkit-text-size-adjust: 100%;
+		  }
+			script {
+				display: block;
+		    white-space: pre;
+		    text-shadow: none;
+		    background: #333;
+		    border-radius: 6px;
+		    color: #fff;
+		    font-family: monaco, courier, monospace;
+		    padding: 10px;
+		    margin-top: 16px;
+		    max-height: 60vh;
+		    overflow-y: auto;
+			}
+			script::before {
+			  content: 'Source:';
+			  color: #0f0;
+			}
+		</style>
+	</head>
+	<body>
+		<script>
+			
+			// for in
+			var obj = {
+				name: 'NARUTOne',
+				age: 23,
+				sex: 'Y'
+			}
+			for(var key in obj) {
+				console.log(key);
+			}
+			console.log(key);
+			
+			var list;
+			for(list in obj) {
+				console.log(list)
+			}
+			console.log(list)
+			
+			// label 语句 , 一般由 break,continue引用， 退出循环直接回到label标记出的循环语句，判断是直接退出还是继续执行
+			
+			var i, j;
+
+			loop1:
+			for (i = 0; i < 3; i++) {      //The first for statement is labeled "loop1"
+			   loop2:
+			   for (j = 0; j < 3; j++) {   //The second for statement is labeled "loop2"
+			      if (i === 1 && j === 1) {
+			         continue loop1;
+			      }
+			      console.log('i = ' + i + ', j = ' + j);
+			   }
+			}
+			
+			//with语句 ，性能问题，不建议使用
+			
+			var name = obj.name
+			var age = obj.name
+			
+			with(obj) {
+				var name = name
+				var age = age
+			}
+			
+			//switch  语句 , 全等比较，不会发生类型转换
+			
+			var num = 23
+			
+			switch(num) {
+				case '23':
+					consol.log('23');
+					break;
+				case 23:
+					console.log(23)
+					break;
+				default:
+					console.log(0)
+			}
+			
+			switch(true) {
+				case num < 0:
+					consol.log('<0');
+					break;
+				case num>0 && num < 25:
+					console.log(num)
+					break;
+				default:
+					console.log(0)
+			}
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>包装类型-Number</title>
+	<style type="text/css">
+		body {
+	    width: 896px;
+	    min-height: calc(100vh - 48px);
+	    margin: 0 auto;
+	    padding: 24px 16px;
+	    background: #fefefe;
+	    color: rgb(60,60,60);
+	    -webkit-text-size-adjust: 100%;
+	  }
+		script {
+			display: block;
+	    white-space: pre;
+	    text-shadow: none;
+	    background: #333;
+	    border-radius: 6px;
+	    color: #fff;
+	    font-family: monaco, courier, monospace;
+	    padding: 10px;
+	    margin-top: 16px;
+	    /*
+	    max-height: 60vh;
+	    overflow-y: auto;*/
+		}
+		script::before {
+		  content: 'example code:';
+		  color: #0f0;
+		}
+	</style>
+</head>
+<body>
+	<h3>包装类型——Number</h3> 
+	<script type="text/javascript">
+		/**
+		 * Number 对象
+		 */
+		
+		(function() {
+			var numObj = new Number(false);
+
+			var num = numObj.valueOf();
+
+			console.log(num); 
+			console.log(typeof numObj); // 'object'
+			console.log(typeof num); // 'number'
+			console.log(numObj instanceof Number); // true
+			console.log(num instanceof Number); // false
+		})();
+		
+		/**
+		 * Number 方法
+		 */
+		
+		( function() {
+			// 进制 toString(n)
+			var num = 10;
+			console.log(num.toString()); // '10'
+			console.log(num.toString(2)); //'1010'
+			console.log(num.toString(8)); // '12'
+			console.log(num.toString(10)); // '10'
+			console.log(num.toString(16)); // 'a'
+
+			// 指定小数位 toFixed(n); toExponential(n) 指数表示法，数值小数位n
+			// 自动显示格式，数值位数n: toPrecision(n)
+			
+			console.log(num.toFixed(2)); // '10.00'
+			console.log(num.toExponential(2)); // '1.00e+1'
+
+			var n = 101;
+			console.log(n.toPrecision(1)); // '1e+2'
+			console.log(n.toPrecision(2)); // '1.0e+2'
+		})();
+	</script>
+</body>
+</html>

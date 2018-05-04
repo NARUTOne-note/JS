@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>日期Date</title>
+	<style type="text/css">
+		body {
+	    width: 896px;
+	    min-height: calc(100vh - 48px);
+	    margin: 0 auto;
+	    padding: 24px 16px;
+	    background: #fefefe;
+	    color: rgb(60,60,60);
+	    -webkit-text-size-adjust: 100%;
+	  }
+		script {
+			display: block;
+	    white-space: pre;
+	    text-shadow: none;
+	    background: #333;
+	    border-radius: 6px;
+	    color: #fff;
+	    font-family: monaco, courier, monospace;
+	    padding: 10px;
+	    margin-top: 16px;
+	    /*
+	    max-height: 60vh;
+	    overflow-y: auto;*/
+		}
+		script::before {
+		  content: 'example code:';
+		  color: #0f0;
+		}
+	</style>
+</head>
+<body>
+	<script type="text/javascript">
+		/*
+			Date 日期类型 
+		*/
+		var now = new Date();
+		console.log(now); // 按当地时间标准
+
+		var start = +new Date();
+		// var start = Date.now();
+
+		// 转换获取毫秒数  Date.parse(), 字符串不能表示日期，返回NaN
+		// Date.UTC()
+		(() => {
+			var now = new Date();
+			
+			var sometime = new Date('2017/08/29 15:35:00');
+			var sometime2 = new Date(Date.parse('2017/08/29 15:35:00'));
+			var sometime3 = new Date(Date.parse('08/29/2017 a'));
+			var sometime4 = new Date(Date.parse('08/29/2017'));
+			var sometime5 = new Date(Date.parse('May 25, 2017'));
+
+			console.log(sometime);
+			console.log(sometime2);
+			console.log(sometime3); //Invalid Date
+			console.log(sometime4);
+			console.log(sometime5);
+
+			var utctime = new Date(Date.UTC(2017, 8, 29, 15, 44, 50));
+			// var utctime = new Date(2017, 8, 29, 15, 44, 50);
+			console.log(utctime);
+		})();
+
+		var end = Date.now();
+
+		console.log(end - start);
+	</script>
+
+	<script type="text/javascript">
+		/*
+			继承、格式化
+		*/
+
+		//区别地区，浏览器日期标准
+		console.log((new Date()).toLocaleString());
+		console.log((new Date()).toString());
+
+		// Date的内置valueOf()  可以用来比较日期大小
+
+		var date1 = new Date(2017, 0, 1);
+		var date2 = new Date(2017, 1, 1);
+
+		console.log(date1 > date2)
+
+	</script>
+
+	<script type="text/javascript">
+		/*
+			Date 部分日期获取
+		*/
+
+		var now = new Date();
+
+		console.log(now.getTime());
+		console.log(now.getFullYear());
+		console.log(now.getMonth()); // 计算机中月份从0-11，对应1-12月份
+		console.log(now.getDay());
+		console.log(now.getHours());
+		console.log(now.getMinutes());
+		console.log(now.getSeconds());
+
+
+		var date1=new Date(2015,9,15,16,13,30);
+		console.log(date1);//输出是显示为10月，实际为9月，当输入8月，才能正常显示9月
+		
+		/*工作签约*/
+		var hiredate=new Date("2012/06/30");
+		var enddate=new Date(hiredate.getTime());
+
+		enddate.setFullYear(enddate.getFullYear()+3);
+		console.log("到期时间："+enddate);
+
+		var confirmdate=new Date(enddate.getTime());
+		confirmdate.setMonth(enddate.getMonth()-1);
+		
+		if(confirmdate.getDay()==6){
+			confirmdate.setDate(confirmdate.getDate()-1);
+		}
+		else if(confirmdate.getDay()==0){
+			confirmdate.setDate(confirmdate.getDate()-2);
+		}
+		console.log("续签时间："+confirmdate);
+
+	</script>
+</body>
+</html>

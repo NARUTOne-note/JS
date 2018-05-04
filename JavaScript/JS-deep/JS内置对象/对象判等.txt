@@ -1,0 +1,11 @@
+Objects部分最复杂的一个函数是内部用的equal，可能也是整个underscore最复杂的一个，这里最重要的知识点就是javascript的判等，注意引用类型不能直接使用“==”或“===”，需要使用迭代函数转化成原始类型进行比较。underscore的isEqual函数与javascript的完全等同(===)或相等(==)不太一样，更符合人的直觉。根据源码简单总结一下规则，有顺序，前面的规则没有匹配才匹配后面的：
+
+如果两个变量完全等同，且不为0，则返回true。如果是0的话，要保证符号一样(0和-0认为不相等)，来源于egal：http://wiki.ecmascript.org/doku.php?id=harmony:egal
+如果两个变量都是null或都是undefined，返回true
+如果两个变量的类型不一样，返回false，类型使用Object.prototype.toString.call()来获得
+对于String类型，原始类型和包装类型，只要值一样，认为相等“5” isEqual new String("5")
+两个变量都是NaN返回true，判断是否是NaN依据Object.prototype.toString.call()为[object Number]，且a!=+a；其他Number类型依据egal原则判断
+对于Date和Boolean类型转化为原始的数字类型进行比较
+RegExp类型要比较source、global、multiline和ignoreCase几个属性
+函数变量认为不相等(引用指向同一个函数的情况已经在第一条规则排除了)
+对于数组和普通对象类型，基于上面的规则递归判断，所有子对象都相等才返回true
