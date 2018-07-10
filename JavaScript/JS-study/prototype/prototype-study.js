@@ -1,12 +1,13 @@
 /*
  * javascript 原型及原型链
- * prototype: 在函数身上，指向原型对象
+ * prototype: 在函数身上，指向原型对象，实例的原型对象
  * __proto__: 在对象身上（包括函数创建的对象, 函数本身和原型对象），指向自身的原型
  * constructor: 在原型对象上，指向构造函数, 在多级继承的时候，指明构造函数方便在对象上扩展原型属性
  * Object.__protp__为null: 原型的顶端
  * 
  * 真正形成原型链的是每个对象的__proto__属性，而不是函数的prototype属性，这是很重要的。
- * hasOwnProperty 是 JavaScript 中唯一一个只涉及对象自身属性而不会遍历原型链的方法
+ * hasOwnProperty: 是 JavaScript 中唯一一个只涉及对象自身属性而不会遍历原型链的方法, 只找实例对象， 及原型对象， 不找函数对象自身
+ * in: 查找 实例及原型链上是否存在属性， "name" in fun, 只找实例对象 及 原型对象 不找函数对象自身
  * */
 
 var o = {a: 1};
@@ -42,13 +43,13 @@ var Calculator = function (decimalDigits, tax) {
     this.tax = tax;
 };
 Calculator.prototype = {
-    add: function (x, y) {
+  add: function (x, y) {
     return x + y;
-},
+  },
 
-subtract: function (x, y) {
+	subtract: function (x, y) {
     return x - y;
-    }
+  }
 };
 console.log((new Calculator()).add(1, 3));
 
@@ -101,6 +102,21 @@ var p1 = new Point(10, 20);
 p1.print(); // 10 20
 console.log(p1 instanceof Point); // true
 
+// isPrototypeOf() 原型判断
+
+console.log(Point.prototype.isPrototypeOf(p1)) // true 
+
+// Object.getPrototypeOf() 获取原型
+
+console.log(Object.getPrototypeOf(p1) == p1.__proto__  == Point.prototype) // true 
+
+// hasOwnProperty
+console.log(Point.hasOwnProperty('x')) // false
+console.log(p1.hasOwnProperty('x')) // true
+
+console.log("x" in Point) // false
+console.log("x" in p1)  // true
+
 var p2 = new (Point)(20, 20);
 p2.print(); // 20 20
 console.log(p2 instanceof Point); // true
@@ -109,10 +125,13 @@ var a=function(){
 this.value = 43;
 //empty
 }
+
+// 实例修改值，不会修改原型中值，只是屏蔽
 a.prototype.var1=[1,2,3];
-var b=new a();
+var b= new a();
 b.var1.push(4);
 b.value = 42
+// delete b.var1
 var c=new a();
 console.log(c.var1.join(","))
 console.log(c.value)
@@ -157,3 +176,39 @@ var obj1 = object(obj);
 obj1.age = 24
 
 console.log(obj1.name)
+
+
+// 三种对象枚举
+function Person () {
+	this.name = 'narutone';
+	this.age = 19;
+}
+Person.prototype = {
+	constructor: Person,
+	job: '动漫'
+};
+
+let per1 = new Person();
+// 第一种 for in , 依次向上查找返回
+let keys = [];
+let pkeys = [];
+for (let key in per1) {
+	keys.push(key);
+}
+for (let pkey in Person.prototype) {
+	pkeys.push(pkey);
+}
+console.log(keys); // ["name", "age", "job"]
+console.log(pkeys); //["job"]
+
+// 二、Object.keys() , 本身实例可枚举属性
+
+console.log(Object.keys(per1)); //["name", "age"]
+console.log(Object.keys(Person.prototype)); //["job"]
+
+// Object.getOwnPropertyNames(); 自身所有属性，包含非可枚举的  
+// var arr = ["a", "b", "c"];
+// console.log(Object.getOwnPropertyNames(arr).sort()); //["0", "1", "2", "length"]
+
+console.log(Object.getOwnPropertyNames(per1)); // ["name", "age"]
+console.log(Object.getOwnPropertyNames(Person.prototype)); // ["constructor", "job"]

@@ -27,6 +27,10 @@
     this.sayName = sayName;
   }
 
+  Person.prototype = {
+    constructor: Person
+  };
+
   var person1 = new Person('naruto', 20, "忍者");
   var person1 = new Person('luffy', 19, "海贼");
 
