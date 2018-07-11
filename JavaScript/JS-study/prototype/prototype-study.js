@@ -36,22 +36,35 @@ function f(){
 
 
 // 第一种
-//通过给Calculator对象的prototype属性赋值对象字面量来设定Calculator对象的原型。
+//通过给Calculator对象的prototype属性赋值对象字面量来设定Calculator对象的原型。本质重置了默认的prototype，则constructor => Object
 
 var Calculator = function (decimalDigits, tax) {
     this.decimalDigits = decimalDigits;
     this.tax = tax;
 };
 Calculator.prototype = {
-  add: function (x, y) {
-    return x + y;
-  },
+    constructor: Calculator, // 可枚举
+    add: function (x, y) {
+        return x + y;
+    },
 
 	subtract: function (x, y) {
     return x - y;
   }
 };
-console.log((new Calculator()).add(1, 3));
+var calc = new Calculator();
+
+console.log((calc).add(1, 3));
+console.log(calc instanceof Calculator); // true
+console.log(calc instanceof Object); // true
+console.log(calc.constructor == Calculator); // true
+
+// es6 Object.defineProperty
+
+Object.defineProperty(Calculator.prototype, 'constructor', {
+    enumerable: false,
+    value: Calculator
+});
 
 //第二种
 //赋值原型prototype的时候使用function立即执行的表达式来赋值，即如下格式:Calculator.prototype = function () { } ();, 
@@ -74,7 +87,7 @@ Calculator.prototype = function () {
 console.log((new Calculator()).add(1, 3));
 
 
-// 第三种，分别设置添加
+// 第三种，分别设置添加，未重置
 var Calculator = function (decimalDigits, tax) {
     this.decimalDigits = decimalDigits;
     this.tax = tax;
@@ -212,3 +225,4 @@ console.log(Object.keys(Person.prototype)); //["job"]
 
 console.log(Object.getOwnPropertyNames(per1)); // ["name", "age"]
 console.log(Object.getOwnPropertyNames(Person.prototype)); // ["constructor", "job"]
+
