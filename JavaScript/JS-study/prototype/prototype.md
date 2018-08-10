@@ -1,8 +1,9 @@
 # Welcome to prototype
 
-![](http://i.imgur.com/ouw4M3j.jpg)
+![prototype](http://i.imgur.com/ouw4M3j.jpg)
 
 ## 学习篇
+
 - [Javascript 继承机制的设计思想](http://www.ruanyifeng.com/blog/2011/06/designing_ideas_of_inheritance_mechanism_in_javascript.html)
 - Javascript 面向对象编程（一）：[js封装](http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_encapsulation.html)
 - Javascript 面向对象编程（二）：[构造函数的继承](http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_inheritance.html)
@@ -74,28 +75,27 @@ function New (f) {
 }
 ```
 
-**getPrototypeOf**
+**getPrototypeOf**:
 
 ```js
-	function Foo() {
-		this.someProp = 'prop'
-	}
-	var o = new Foo();
-	JavaScript 实际上执行的是：
-	
-	var o = new Object();
-	o.__proto__ = Foo.prototype;
-	Foo.call(o);
-	（或者类似上面这样的），然后当你执行：
-	
-	o.someProp;
+function Foo() {
+    this.someProp = 'prop'
+}
+var o = new Foo();
+// JavaScript 实际上执行的是：
+
+var o = new Object();
+o.__proto__ = Foo.prototype;
+Foo.call(o);
+// (或者类似上面这样的），然后当你执行：
+
+o.someProp;
 ```
 它会检查是否存在 someProp 属性。如果没有，它会查找 Object.getPrototypeOf(o).someProp ,如果仍旧没有，
 它会继续查找 Object.getPrototypeOf(Object.getPrototypeOf(o)).someProp ，
 一直查找下去，直到它找到这个属性 或者 Object.getPrototypeOf() 返回 null 。
 
-
-**示例** 
+**示例** :
 
 ```js
 function A(a){
@@ -124,21 +124,20 @@ function B(a, b){
 }
 B.prototype = Object.create(A.prototype, {
   varB : {
-    value: null, 
-    enumerable: true, 
-    configurable: true, 
-    writable: true 
+    value: null,
+    enumerable: true,
+    configurable: true,
+    writable: true
   },
-  doSomething : { 
+  doSomething : {
     value: function(){ // override
-      A.prototype.doSomething.apply(this, arguments); 
+      A.prototype.doSomething.apply(this, arguments);
       // call super
       // ...
       console.log(2)
-      
     },
     enumerable: true,
-    configurable: true, 
+    configurable: true,
     writable: true
   }
 });
@@ -149,7 +148,8 @@ b.doSomething();
 //1
 //2
 ```
-![](http://i.imgur.com/xmuAAaN.png)
+
+![xmuaaan](http://i.imgur.com/xmuAAaN.png)
 
 ## 运用篇
 
@@ -159,8 +159,7 @@ b.doSomething();
 
 - [原型继承方式简介](https://segmentfault.com/a/1190000000766541)
 
-
-**new 与 apply**
+**new 与 apply**:
 
 ```js
 Function.prototype.new = function () {
@@ -194,7 +193,7 @@ var deepClone = function(source,target){
             var item = source[i] ;
             if(typeof item === 'object'){
                 target[i] = (toStr.apply(item).toLowerCase() === arrStr) ? [] : {} ;
-                deepClone(item,target[i]) ;    
+                deepClone(item,target[i]) ;
             }else{
                 target[i] = item;
             }

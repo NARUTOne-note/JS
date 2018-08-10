@@ -70,13 +70,13 @@ var [col1, col2]  = $('.column'),
 
 // es6的写法
 var obj = {
-  method: function() { ... }
+  method: function() { /*...*/ }
 };
 obj.__proto__ = someOtherObj;
 
 // es5的写法
 var obj = Object.create(someOtherObj);
-obj.method = function() { ... };
+obj.method = function() { /*...*/ };
 
 //__proto__无论从语义的角度，还是从兼容性的角度，都不要使用这个属性，
 //而是使用下面的Object.setPrototypeOf()（写操作）、Object.getPrototypeOf()（读操作）、Object.create()（生成操作）代替。
@@ -87,7 +87,7 @@ Object.setPrototypeOf(object, prototype)
 // 用法
 var o = Object.setPrototypeOf({}, null);
 //=> 等效
-function (obj, proto) {
+function o (obj, proto) {
   obj.__proto__ = proto;
   return obj;
 }
@@ -265,7 +265,7 @@ class baseModel {
  */
 
 // MyClass.js
-export default class { ... }
+export default class { /*...*/ }
 
 // main.js
 import MyClass from 'MyClass';
