@@ -9,7 +9,6 @@
 
 var fn = function(callback) {
     // do something here
-    ...
     setTimeout(function() {
 			callback.apply(this, this.arguments);
     }, 300)
@@ -123,7 +122,7 @@ function* gen(x){
 }
 var g = gen(1);
 g.next(); // 3
-g.throw（'出错了'）;// 出错了
+g.throw('出错了');// 出错了
 
 // 8、async/await  ES7
 
