@@ -118,7 +118,7 @@ function Person(name, age, job){
  //返回对象
  return o;
 }
-var person =Person("weiqi",22,"banzhuan");
+var person = Person("weiqi",22,"banzhuan");
 person.sayName(); //weiqi
 ```
 
