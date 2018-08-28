@@ -37,8 +37,9 @@
 	<script type="text/javascript">
 		/*
 		 *以下内容仅为学习测试所记，没有考虑运行 
-		 * 
-		 * */
+		 *
+		 * */ 
+		// 函数声明提升 ES5-
 		//函数声明
 		function foo () {}
 		
@@ -115,7 +116,7 @@
 	//这是一个自执行的函数，函数内部执行自身，递归
 		function foo() { foo(); }
 		
-		// 这是一个自执行的匿名函数，因为没有标示名称
+		// 这是一个自执行的匿名函数 （拉姆达函数），因为没有标示名称
 		// 必须使用arguments.callee属性来执行自己
 		var foo = function () { arguments.callee(); };
 		
