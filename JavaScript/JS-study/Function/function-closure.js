@@ -32,7 +32,14 @@
   * ! 闭包  Function
   */
 
-  function compare (v1, v2) {
+// ? 作用域链： 执行变量对象的指针列表
+// * 执行环境 => 作用域链 => 1、全局变量对象； 2、活动对象
+// * 就近原则查找变量， 一般局部变量用完释放销毁，但闭包除外
+function compareFun (key) {
+  var compareKey = key || '';
+  return function (o1, o2) {
+    var v1 = o1[compareKey];
+    var v2 = o2[compareKey];
     if (v1 < v2) {
       return -1;
     } else if (v1 > v2) {
@@ -40,4 +47,60 @@
     } else {
       return 0;
     }
+  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+}
+
+var compare = compareFun('age');
+var result = compare({age: 12}, {age: 10});
+compare = null; // 释放内存
+
+// ? 闭包匿名，保持变量不变
+// * 作用域链: scope-chain.png
+
+function outer(){
+  var result = new Array();
+  for(var i = 0; i < 2; i++){
+     //定义一个带参函数
+     result[i] = function(num){
+        function innerarg(){
+           return num;
+        }
+        return innerarg;
+     }(i);//预先执行函数写法
+     //把i当成参数传进去
   }
+  return result;
+}
+
+// 闭包 this
+
+this.name = "Leilei";
+ 
+var user = {
+    name: "Shishi",
+    sayHey1: () => {
+        console.log(`Hi, I am ${this.name}`);
+        console.log(`Hi, I am ${user.name}`);
+    },
+    sayHey2 () {
+        console.log(`Hi, I am ${this.name}`);
+        console.log(`Hi, I am ${user.name}`);
+    }
+};
+ 
+var CallMe = {
+    call () {
+        this.name = "Yaoyao";
+        user.sayHey1(); // 函数本身
+        user.sayHey2();
+        console.log(`Hi, I am ${this.name}`);
+    }
+}
+ 
+CallMe.call();
+
+// Leilei
+// Shishi
+// Shishi
+// Shishi
+// Yaoyao

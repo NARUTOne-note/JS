@@ -513,7 +513,8 @@ firefox wheel detlaY 下3 上-3
 IE9-11 wheel deltaY 下40 上-40
 
 chrome wheel deltaY 下100 上-100  
-事件委托方法
+
+### 事件委托方法
 //事件委托方法  
 IE：document.body.onload = inject; //Function inject()在这之前已被实现  
 FF：document.body.onload = inject();   
@@ -539,7 +540,7 @@ FF：document.body.onload = inject();
 只要元素不在dom树上，一定会返回false，实在不行把元素丢在body里面匹配完了再删掉吧，当然了我们也可以自己写匹配函数以避免回流。    
 to be continued...
 
-资料参考：
+## 资料参考：
 http://w3help.org/zh-cn/kb/，
 http://www.zhihu.com/question/29072028
 
