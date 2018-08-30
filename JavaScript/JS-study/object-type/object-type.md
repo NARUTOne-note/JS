@@ -6,6 +6,8 @@
 - 包装类型： Boolean, String, Number
 - 内置对象： Global(window), Math
 
+> js-数据类型, undefined, null, Number, String, Object, Boolean
+
 ## Object 
 
 - [object MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Working_with_Objects)
