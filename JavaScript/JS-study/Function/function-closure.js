@@ -104,3 +104,17 @@ CallMe.call();
 // Shishi
 // Shishi
 // Yaoyao
+
+// ? 内存泄露
+// 闭包会引用包含函数的整个活动对象
+
+function getEleId () {
+  var ele = document.getElementById('app');
+  var id = ele.id;
+  ele.onclick = function () {
+    console.log(id);
+  }
+
+  // 回收 元素
+  ele = null;
+}
