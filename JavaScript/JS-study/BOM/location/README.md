@@ -1,0 +1,3 @@
+# location
+
+[window.location](https://developer.mozilla.org/en-US/docs/Web/API/Window/location)
