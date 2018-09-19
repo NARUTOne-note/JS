@@ -1,8 +1,8 @@
-### Welcome to JavaScript library
+# Welcome to JavaScript library
 
 - [web页面模板引擎](http://blog.jobbole.com/56689/)
 
-### 初步想法
+## 初步想法
 
 ```js
 var TemplateEngine = function(tpl, data) {
@@ -15,23 +15,27 @@ console.log(TemplateEngine(template, {
 }));
 ```
 
-**正则匹配**
+**正则匹配**：
+
 ```js
 var re = /<%([^%>]+)?%>/g;
 var match = re.exec(tpl);
 ```
+
 console打印出来
+
 ```js
 [
     "<%name%>",
-    " name ", 
+    " name ",
     index: 21,
-    input: 
+    input:
     "<p>Hello, my name is <%name%>. I\'m <%age%> years old.</p>"
 ]
 ```
 
 改进，打印所有匹配项
+
 ```js
 var re = /<%([^%>]+)?%>/g;
 while(match = re.exec(tpl)) {
@@ -39,7 +43,7 @@ while(match = re.exec(tpl)) {
 }
 ```
 
-**变量替换**
+**变量替换**：
 
 ```js
 var TemplateEngine = function(tpl, data) {
@@ -50,15 +54,16 @@ var TemplateEngine = function(tpl, data) {
     return tpl;
 }
 ```
+
 >数据data格式固定，对复杂格式不匹配。
 
 改进，模板中使用javascript语法进行匹配
 
 ```js
 //预期
-var template = 
-'My skills:' + 
-'<%for(var index in this.skills) {%>' + 
+var template =
+'My skills:' +
+'<%for(var index in this.skills) {%>' +
 '<a href=""><%this.skills[index]%></a>' +
 '<%}%>';
 ```
@@ -73,7 +78,8 @@ var fn = function(arg) {
 fn(2);
 ```
 
-利用数组分开，最后拼接。
+利用数组分开，最后拼接
+
 ```js
 var r = [];
 r.push('My skills:'); 

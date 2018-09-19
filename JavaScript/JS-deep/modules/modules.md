@@ -1,4 +1,4 @@
-### Welcome to js の modules
+# Welcome to js の modules
 
 - [Javascript模块化编程](http://www.ruanyifeng.com/blog/2012/10/javascript_module.html)
 - [JS模块加载发展](https://segmentfault.com/a/1190000009446236)
@@ -325,7 +325,8 @@ UMD的实现很简单：
 - export / import : 只有es6 支持的导出引入
 - module.exports / exports: 只有 node 支持的导出
 
-### exports、module.exports
+## exports、module.exports
+
 > node模块， commonJS规范
 
 CommonJS定义的模块分为: 模块标识(module)、模块定义(exports) 、模块引用(require)
@@ -365,11 +366,11 @@ console.log(a) // 打印为 {a : 200}
 
 > 为了避免糊涂，尽量都用 module.exports 导出，然后用require导入
 
-### export 和 export default (import)
+## export 和 export default (import)
+
 > ES6 模块语法
 
 - export与export default均可用于导出常量、函数、文件、模块等
 - 在一个文件或模块中，export、import可以有多个，export default仅有一个
 - 通过export方式导出，在导入时要加{ }，export default则不需要
 - export能直接导出变量表达式，export default不行。
-

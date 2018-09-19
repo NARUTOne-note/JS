@@ -34,7 +34,6 @@ Object.defineProperty(obj, "attr", {
 	value: 'test-attr'
 });
 /**
- * 或
  * Object.defineProperty(obj, {
  * 	"attr": {
  * 		writable: false,
@@ -73,7 +72,8 @@ console.log(obj.attr2);
 
 /**
  * 读取属性的特性
- * Object.getOwnPropertyDescriptor()
+ * Object.getOwnPropertyDescriptor() 属性值
+ * Object.getOwnPropertyNames() 属性名
  */
 
 var definePropertyObj = Object.getOwnPropertyDescriptor(obj, 'attr');
@@ -112,4 +112,21 @@ for (let key in demo) {
 	// 默认情况下通过defineProperty定义的属性是不能被枚举(遍历)的
 	// 需要设置enumerable为true才可以 否则只能拿到singer 属性
 	console.log(key); // singer, music
+}
+
+
+// 把source里的属性一个一个拿出来然后定义到target中。
+
+function Composition(target, source)
+{
+    var desc  = Object.getOwnPropertyDescriptor;
+    var prop  = Object.getOwnPropertyNames;
+    var def_prop = Object.defineProperty;
+ 
+    prop(source).forEach(
+        function(key) {
+            def_prop(target, key, desc(source, key))
+        }
+    )
+    return target;
 }

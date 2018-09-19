@@ -138,7 +138,7 @@ console.log(person.friends); // ['0', "1", "2", "3", "4"]
  // ! 寄生式继承
 // ?使用原型式继承获得一个目标对象的浅复制，然后增强这个浅复制的能力。
  function createAnother(o) {
-  var clone = object(o);
+  var clone = objectExtends(o);
   clone.sayHi = function () {
     alert('hi');
   };
@@ -147,7 +147,7 @@ console.log(person.friends); // ['0', "1", "2", "3", "4"]
  // ! 寄生组合继承
 // 核心：因为是对父类原型的复制，所以不包含父类的构造函数，也就不会调用两次父类的构造函数造成浪费
  function inheritPrototype(subType, superTyper) {
-  var newprototype = object(superTyper.prototype); // 父类原型浅复制
+  var newprototype = objectExtends(superTyper.prototype); // 父类原型浅复制
   newprototype.constructor = subType; // 修正原型构造函数
   subType.prototype = newprototype;
 }
