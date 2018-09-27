@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>window  size</title>
+  <style>
+    bady {
+      padding: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="size"></div>
+</body>
+<script>
+  var sizeEle = document.getElementsByClassName('size')[0];
+  var htmlStr = '';
+
+  // 移动浏览器，精准大小
+  // ！可能被浏览器禁用
+
+  // window.resizeTo(100, 100); // 大小到 (100, 100)
+  // window.resizeBy(100, 100);  // 调整大小 新窗口与原窗口大小之差， (200, 200)
+
+  // 浏览器兼容，浏览器大小
+  var pageWidth = window.innerWidth;
+  var pageHeight = window.innerHeight;
+
+  if (typeof pageWidth !== 'number') {
+    if (document.compatMode === 'CSS1Compat') { // 是否标准模式, 混杂模式
+      pageWidth = document.documentElement.clientWidth;
+      pageHeight = document.documentElement.clientHeight;
+    } else {
+      pageWidth = document.body.clientWidth;
+      pageHeight = document.body.clientHeight;
+    }
+  }
+
+  htmlStr = htmlStr + "<h2>浏览器大小</h2>" + "窗口Width ：" + pageWidth + '窗口上 height ：' + pageHeight;
+
+  sizeEle.innerHTML = htmlStr;
+</script>
+</html>

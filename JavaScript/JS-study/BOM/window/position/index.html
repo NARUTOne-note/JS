@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>window  position</title>
+  <style>
+    bady {
+      padding: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="position"></div>
+</body>
+<script>
+  var posEle = document.getElementsByClassName('position')[0];
+  var htmlStr = '';
+
+  // 移动浏览器，精准定位
+  // ！可能被浏览器禁用
+
+  window.moveTo(100, 100); // 移动到xx像素
+  // window.moveBy(100, 100);  // 移动xx像素
+
+  // 浏览器兼容，浏览器位置
+  var leftPos = (typeof window.screenLeft === 'number') ? window.screenLeft : window.screenX;
+  var topPos = (typeof window.screenTop === 'number') ? window.screenTop : window.screenY;
+
+  htmlStr = htmlStr + "<h2>浏览器位置</h2>" + "窗口左边距 screenLeft ：" + leftPos + '窗口上边距 screenTop ：' + topPos;
+
+  posEle.innerHTML = htmlStr;
+</script>
+</html>
