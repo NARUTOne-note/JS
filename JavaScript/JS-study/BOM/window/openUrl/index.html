@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    a {
+      cursor: pointer;
+    }
+    a:hover {
+      color: rgb(51, 146, 190);
+    }
+  </style>
+</head>
+<body>
+  <div class="body">
+    <h3>window.open(href, name, str, bol)</h3>
+    <ul>
+      <li><a onclick="return openFun('http://www.baidu.com')">open(href)</a></li>
+      <li><a onclick="return openFun('http://www.baidu.com', 'baidu')">open(href, name)</a></li>
+      <li><a onclick="return openFun('http://www.baidu.com', '_blank')">open(href, name) _blank</a></li>
+      <li><a onclick="return openFun('http://www.baidu.com', 'baidu1', 'height=400,width=400,top=100,left=100,resizeable=yes')">open(href, name, str)</a></li>
+      <li><a onclick="return openFun('http://www.baidu.com', 'baidu2', '', true)">open(href, name, str, bol)</a></li>
+    </ul>
+  </div>
+</body>
+<script>
+  /**
+   * href: 跳转url, 注意带上http/https
+   * name: 具体窗口及框架名，或者_self, _parent, _top, _blank
+   * str: 配置项；一些不存在name的窗口或框架，配置新窗口选项, 逗号分隔：height, left, top, width, ...详【JS高教P200】
+   * bol: 是否取代当前网址下的浏览器历史记录, false
+   *  
+   */
+
+   /**
+    * if(e.preventDefault){
+      e.preventDefault();
+    }else{
+      window.event.returnValue == false;
+    }
+    */
+  function openFun (href='', name='', str="", bol=false) {
+    console.log(1);
+    if (!href) return false;
+    var wins = window.open(href, name, str, bol);
+    setTimeout(() => {
+      wins.close();
+    }, 10000);
+    return false;
+  }
+
+</script>
+</html>
