@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <Button id="flash">Flash</Button>
+  <Button id='pdf'>pdf</Button>
+  <Button id='quickTIme'>QuickTime</Button>
+  <p id="text"></p>
+</body>
+<script>
+  var textBox = document.getElementById('text');
+  var flashBtn = document.getElementById('flash');
+  var pdfBtn = document.getElementById('pdf');
+  var quickBtn = document.getElementById('quickTIme');
+  
+  function inputText (plugin) {
+    console.log(plugin);
+    var str = '';
+    str = JSON.stringify(plugin);
+    textBox.innerHTML = plugin;
+  }
+
+  function hasPlugin(name) {
+    name = name.toLowerCase();
+    for(var i = 0; i < navigator.plugins.length; i++) {
+      var plugin = navigator.plugins[i]; // MimeType 对象数组
+      if(plugin.name.toLowerCase().indexOf(name) > -1) {
+        inputText(plugin);
+        return true;
+      }
+    }
+    inputText(false);
+    return false;
+  }
+  // IE
+  function hasIEPlugin(name) {
+    try {
+      new ActiveXObject (name);
+      inputText(true);
+      return true;
+    } catch (err) {
+      inputText(false);
+      return false;
+    }
+  }
+
+  flashBtn.onclick = () => {
+    ! hasPlugin('Flash') && hasIEPlugin('ShockwaveFlash.ShockwaveFlash');
+  }
+
+  pdfBtn.onclick = () => {
+    ! hasPlugin('pdf') && hasIEPlugin('pdf.pdf');
+  }
+
+  quickBtn.onclick = () => {
+    ! hasPlugin('QuickTime') && hasIEPlugin('QuickTime.QuickTime');
+  }
+
+</script>
+</html>
