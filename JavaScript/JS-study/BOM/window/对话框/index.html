@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h2>浏览器对话框</h2>
+  <Button onclick="openAlert()">alert</Button>
+  <Button onclick="openConfirm()">confirm</Button>
+  <Button onclick="openPromat()">prompt</Button>
+</body>
+<script>
+  function openAlert () {
+    alert('This is a alert!');
+  }
+  function openConfirm () {
+    var bol = confirm('This is a confirm!');
+    alert('confirm: '+bol);
+  }
+  function openPromat () {
+    var result = prompt('your name ?');
+
+    if (result !== null) {
+      alert('welcome, ' + result);
+    }
+  }
+  // 显示打印对话框
+  // window.print();
+
+  // 显示查找对话框
+  // window.find();
+</script>
+</html>
