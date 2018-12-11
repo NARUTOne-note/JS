@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div class="o1">
+    <div class="o2"></div>
+  </div>
+</body>
+<script>
+  var o1 = document.querySelector('.o1');
+  var o2 = document.querySelector('.o2');
+
+  new MutationObserver(function(e) {
+    console.log('1');
+  }).observe(o1, {attributes: true});
+  new Promise(function(resolve) {
+    console.log('start promise');
+    resolve();
+  }).then(function() {
+    console.log('end promise');
+  });
+  new MutationObserver(function(e) {
+    console.log('2');
+  }).observe(o2, {attributes: true});
+
+  o1.addEventListener('click', function(e) {
+    console.log('o1');
+    o1.setAttribute('title', 'o1')
+  });
+  o2.addEventListener('click', function(e) {
+    console.log('o2');
+    o2.setAttribute('title', 'o2')
+  });
+
+  console.log('start');
+  o2.click();
+  console.log('end');
+</script>
+</html>
