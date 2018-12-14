@@ -44,7 +44,7 @@ function f1 (input: boolean) {
   }
 
   // Error: 'b' doesn't exist here
-  return b;
+  // return b;
 }
 
 function foo() {
@@ -73,21 +73,22 @@ f2(true, 0);  // returns 100
 // const 常量，与let类似，但不可重新赋值
 
 const v = 'const';
-v = 'let'; // error
+// v = 'let'; // error
 
 // 解构赋值
-let input = [1, 2];
-let [first, second] = input;
-console.log(first); // outputs 1
-console.log(second); // outputs 2
+let inputs: [number, number] = [1, 2];
+let [first, second] = inputs;
+console.log(first); //  1
+console.log(second); //  2
 // swap variables
 [first, second] = [second, first];
 
-function f3([first, second]: [number, number]) {
+function f3(arr: [number, number]) {
+  const [first, second] = arr;
   console.log(first);
   console.log(second);
 }
-f3(input);
+f3(inputs);
 
 type C = { a: string, b?: number }
 

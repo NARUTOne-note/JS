@@ -1,4 +1,4 @@
-### Welcome to ES6
+# Welcome to ES6
 
 > 下一代 JavaScript 语言
 
