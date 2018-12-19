@@ -1,12 +1,5 @@
 # Welcome to js の modules
 
-- [Javascript模块化编程](http://www.ruanyifeng.com/blog/2012/10/javascript_module.html)
-- [JS模块加载发展](https://segmentfault.com/a/1190000009446236)
-- [ES6模块](http://es6.ruanyifeng.com/#docs/module)
-- [AMD,CMD,CommonJS及UMD](http://blog.gejiawen.com/2015/11/03/what-is-amd-cmd-commonjs-umd/)
-- [modules](http://javascript.ruanyifeng.com/nodejs/module.html)
-- [javascript的模块化](https://juejin.im/post/5b4420e7f265da0f4b7a7b27)
-
 ## 模块的写法
 
 模块化编程一般都有这么几个过渡过程，如下描述。
@@ -60,7 +53,7 @@ var module1 = (function(){
 　　　　var m2 = function(){
 　　　　　　//...
 　　　　};
-　　　　return {
+　　　　return { // 对象接口
 　　　　　　m1 : m1,
 　　　　　　m2 : m2
 　　　　};
@@ -343,62 +336,3 @@ UMD的实现很简单：
     return {};
 }));
 ```
-
-## exports、module.exports 和 export、export default 咋回事
-
-> 模块导出
-
-- require: node 和 es6 都支持的引入
-- export / import : 只有es6 支持的导出引入
-- module.exports / exports: 只有 node 支持的导出
-
-## exports、module.exports
-
-> node模块， commonJS规范
-
-CommonJS定义的模块分为: 模块标识(module)、模块定义(exports) 、模块引用(require)
-
-node 执行个文件，默认生成exports及module对象，都指向一块{}内存区域
-
-```js
-// exports => {} <= module.exports
-
-exports = module.exports = {};
-```
-
-看段代码：
-
-```js
-let a = 100;
-
-console.log(module.exports); //能打印出结果为：{}
-console.log(exports); //能打印出结果为：{}
-
-exports.a = 200; //这里辛苦劳作帮 module.exports 的内容给改成 {a : 200}
-
-exports = '指向其他内存区'; //这里把exports的指向重新定义了
-
-//test.js
-
-var a = require('/utils');
-console.log(a) // 打印为 {a : 200}
-
-```
-
->从上面可以看出，其实require导出的内容是module.exports的指向的内存块内容，并不是exports的。
-简而言之，区分他们之间的区别就是 exports 只是 module.exports的引用，辅助后者添加内容用的。
-
-- module.exports 初始值为一个空对象 {}
-- exports 是指向的 module.exports 的引用
-- require() 返回的是 module.exports 而不是 exports
-
-> 为了避免糊涂，尽量都用 module.exports 导出，然后用require导入
-
-## export 和 export default (import)
-
-> ES6 模块语法
-
-- export与export default均可用于导出常量、函数、文件、模块等
-- 在一个文件或模块中，export、import可以有多个，export default仅有一个
-- 通过export方式导出，在导入时要加{ }，export default则不需要
-- export能直接导出变量表达式，export default不行。
