@@ -124,7 +124,11 @@
 			confirmdate.setDate(confirmdate.getDate()-2);
 		}
 		console.log("续签时间："+confirmdate);
-
+		
+		// Date 拼接 , 先调valueOf() [对象都是先调valueOf()]
+		var d = new Date();
+		console.log(d + '1');
+		console.log(d.valueOf() === d.getTime()); // true
 	</script>
 </body>
 </html>
