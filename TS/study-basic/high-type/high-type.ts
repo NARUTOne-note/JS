@@ -159,7 +159,7 @@ c.b = 13;
 c.b = undefined; // ok
 c.b = null; // error, 'null' is not assignable to 'number | undefined'
 
-// !类型断言去除 null|undefined, 采用 !后缀
+// ! 类型断言去除 null|undefined, 采用 !后缀
 
 function fixed(name: string | null): string {
   function postfix(epithet: string) {
