@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h3>history对象</h3>
+  <button id="bt1">前进1页</button>
+  <button id="bt2">前进2页</button>
+  <button id="bt3">后退1页</button>
+  <button id="bt4">跳转到百度</button>
+  <button id="bt5">back, 后退</button>
+  <button id="bt6">forward, 前进</button>
+</body>
+<script>
+  /*
+    当前浏览器标签页history对象，history历史浏览记录
+  */
+  const bt1 = document.getElementById('bt1');
+  const bt2 = document.getElementById('bt2');
+  const bt3 = document.getElementById('bt3');
+  const bt4 = document.getElementById('bt4');
+  const bt5 = document.getElementById('bt5');
+  const bt6 = document.getElementById('bt6');
+
+  alert(history.length);
+
+  bt1.onclick = function() {
+    history.go(1);
+  }
+  bt2.onclick = function() {
+    history.go(2);
+  }
+  bt3.onclick = function() {
+    history.go(-1);
+  }
+  bt4.onclick = function() {
+    history.go('baidu.com');
+  }
+  bt5.onclick = function() {
+    history.back();
+  }
+  bt6.onclick = function() {
+    history.forward();
+  }
+</script>
+</html>
