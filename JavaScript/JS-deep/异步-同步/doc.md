@@ -140,7 +140,7 @@ function launcher(){
 ```js
 async function async1() {
     console.log("async1 start");
-    await  async2(); // //执行这一句后，输出async2后，await会让出当前线程，将后面的代码加到任务队列中，然后继续执行函数后面的同步代码
+    await async2(); // //执行这一句后，输出async2后，await会让出当前线程，(pending状态的promise)，将后面的代码加到任务队列中，然后继续执行函数后面的同步代码
     console.log("async1 end");
 }
 async function async2() {

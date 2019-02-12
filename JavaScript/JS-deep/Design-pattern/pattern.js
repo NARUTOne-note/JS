@@ -174,7 +174,7 @@ function adapterMethod(o) {
 	interfaceMethod(o.str1, o.str2, o.str3);
 }
 
-adapterMethod(clientObject)
+adapterMethod(clientObj)
 
 /**
  * 5、代理模式(Proxy)

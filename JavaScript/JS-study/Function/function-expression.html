@@ -47,6 +47,7 @@
 		var foo = function() {}
 		var foo1 = function foo() {}
 		
+		// new Function
 		var multiply = new Function('x', 'y', 'return x * y');
 		
 		//arguments
@@ -125,7 +126,7 @@
 		var foo = function () { foo(); };
 		
 		
-		//立即执行		
+		// ! 立即执行	IIFE	
 		// 有些人叫这个是自执行的匿名函数（即便它不是），因为它没有调用自身，它只是立即执行而已。
 		(function () { /* code */ } ());
 		

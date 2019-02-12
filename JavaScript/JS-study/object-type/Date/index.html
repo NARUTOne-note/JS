@@ -68,6 +68,17 @@
 		var end = Date.now();
 
 		console.log(end - start);
+
+		// 时间戳
+		// new Date().valueOf() 和 new Date().getTime() 的功能是一样的，都返回当前时间戳。
+		Date.now();
+		new Date().getTime();
+		+new Date();
+
+		// Date 拼接 , 先调valueOf() [对象都是先调valueOf()]
+		var d = new Date();
+		console.log(d + '1');
+		console.log(d.valueOf() === d.getTime()); // true
 	</script>
 
 	<script type="text/javascript">
@@ -124,7 +135,8 @@
 			confirmdate.setDate(confirmdate.getDate()-2);
 		}
 		console.log("续签时间："+confirmdate);
-
+		
+		
 	</script>
 </body>
 </html>

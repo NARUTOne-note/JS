@@ -32,11 +32,18 @@
 	</style>
 </head>
 <body>
+	<script>
+		// 常量不能改，必须赋值
+		const a = 1;
+		a = 2; // error
+	</script>
 	<script type="text/javascript">
 		/**
 			* 变量 JS
 			*
 		*/
+		console.log(a); // error, 未定义, 下面代码不执行
+		console.log('a');
 		var person = new Object();
 		person.name = 'NARUTOne';
 		console.log(person.name);
