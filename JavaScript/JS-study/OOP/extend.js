@@ -51,7 +51,7 @@ function Student(name, score){
 };
  // 继承 注意,继承必须要写在子类方法定义的前面
 Student.prototype = new Person()
- // 所有涉及到原型链继承的继承方式都要修改子类构造函数的指向，否则子类实例的构造函数会指向SuperType。
+ // 所有涉及到原型链继承的继承方式都要修改子类构造函数的指向，否则子类实例的构造函数会指向父实例。
  Student.prototype.constructor = Student;
  // 为子类新增一个方法(在继承之后,否则会被覆盖)
 Student.prototype.study = function () {     // 方法继承
