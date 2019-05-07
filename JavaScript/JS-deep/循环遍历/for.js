@@ -7,7 +7,7 @@
  */
 
 /**
- * Array
+ * Array， 尽量采用for of
  * [√] for...of
  * [√] forEach
  * [√] for...in （遍历的值为索引）
@@ -30,6 +30,13 @@ for (let [index, value] of arr.entries()) {
 for (let index  in arr) {
   console.log(index); // 0, 1, 2, name
 }
+
+var arr0 = []
+arr0[2] = '1'
+for (let key in arr0) {
+  console.log(key)
+}
+// 2, 跳过空元素遍历， forEach类似
 
 /**
  * Object
