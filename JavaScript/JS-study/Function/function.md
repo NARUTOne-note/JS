@@ -6,7 +6,7 @@
 
 JavaScript中函数参数的传递方式。
 
-## 传值还是传引用？
+## 传值还是传引用
 
 ```js
 function changeStuff(num, obj1, obj2)
@@ -45,10 +45,10 @@ console.log(obj2.item);    // unchanged
 
 它的意思是：传引用的拷贝。
 
-* `changeStuff()`中的num, obj1, obj2都是一个引用
-* 他们的内容是某块内存的地址
-* 这个地址的值来自于外部定义的三块内存，是那三块内存地址的一份拷贝
-* 同时，在函数内部这三个参数的值是可以直接被修改的，可以指向其他对象（由于JavaScript中没有指针或引用运算符，只能直接修改）
+- `changeStuff()`中的num, obj1, obj2都是一个引用
+- 他们的内容是某块内存的地址
+- 这个地址的值来自于外部定义的三块内存，是那三块内存地址的一份拷贝
+- 同时，在函数内部这三个参数的值是可以直接被修改的，可以指向其他对象（由于JavaScript中没有指针或引用运算符，只能直接修改）
 
 因此，我们从内存和引用的角度再来看看`changeStuff()`的定义：
 
@@ -66,3 +66,25 @@ function changeStuff(num, obj1, obj2)
 由于call-by-sharing本质上也是**传值**，因此，也可以说JavaScript的传参方式都是传值。
 
 除了JavaScript之外，Python, Java, Ruby, Scheme等语言也是采用call-by-sharing的求值策略。
+
+## 函数式声明、函数表达式
+
+**Javascript中函数声明和函数表达式是存在区别的，函数声明在JS解析时进行函数提升，因此在同一个作用域内，不管函数声明在哪里定义，该函数都可以进行调用。而函数表达式的值是在JS运行时确定，并且在表达式赋值完成后，该函数才能调用**。这个微小的区别，可能会导致JS代码出现意想不到的bug，让你陷入莫名的陷阱中。
+
+```js
+var getName;
+console.log(getName)//undefined
+getName()//Uncaught TypeError: getName is not a function
+var getName = function() {
+    console.log('wscat')
+}
+```
+
+```js
+var getName;
+console.log(getName)//function getName() {console.log('oaoafly')}
+getName()//oaoafly
+function getName() {
+    console.log('oaoafly')
+}
+```
