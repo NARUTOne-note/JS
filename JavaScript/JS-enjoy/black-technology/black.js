@@ -43,21 +43,18 @@ function addBorder2() {
 }
 
 //论如何优雅的取随机字符串
-
 function getString() {
 	return Math.random().toString(16).substring(2) 
 	//Math.random().toString(36).substring(2) 
 }
 
 //转字符
-
 function toString(n) {
 	// (10)["toString"]() === "10"
 	return (n)["toString"]()
 }
 
 //论如何优雅的取整
-
 function getInt(num) {
 	// var a = ~~2.33
 
@@ -69,7 +66,6 @@ function getInt(num) {
 }
 
 // 如何优雅的实现金钱格式化：1234567890 --> 1,234,567,890
-
 function numRegExpFormat(num) {
 	// var test1 = '1234567890'
 	// var format = test1.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
@@ -86,7 +82,6 @@ function numFormat(num) {
 }
 
 // 最短的代码实现数组去重
-
 function uniqueArray(arr) { 
 	// Set 对象
 	// [...new Set([1, "1", 2, 1, 1, 3])] // [1, '1', 2, 3]
@@ -110,5 +105,5 @@ function getNumMax (nums) {
 }
 
 function getNumMin (nums) {
-	return Math.max.apply(Math, nums); 
+	return Math.min.apply(Math, nums); 
 }
