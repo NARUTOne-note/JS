@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>web-worker</title>
+</head>
+<body>
+  
+</body>
+<!-- 特意将其放到了 type 为 text/js-worker 的 <script> 标签里面，以防止其解析，当然也可以自行拼成一个字符串 -->
+<script type="text/js-worker" id="worker">
+  var upload = (data) => {
+    let _self = this
+      setTimeout(function () {
+        // 模拟上传....
+        _self.postMessage({
+          status: 'ok',
+          filename: 'demo.png'
+        })
+      }, 3000)
+    }
+
+    this.onmessage = e => {
+      console.log('接到上传任务')
+      upload(e.data)
+    }
+  }
+</script>
+<script>
+  // Web Worker 是运行在一个单独的线程中，所以是不能直接操作主线程中的资源，自然也不能操作 document、window 这些DOM 对象，
+  // 只能通过 onmessage 和 postMessage 进行两个线程之间的数据交互
+  /*
+    // data URI
+    var script = document.querySelector('#worker').textContent
+    var myWorker = new Worker('data:text/javascript,' + script)
+
+    // blob
+    var script = document.querySelector('#worker').textContent
+    var blob = new Blob([script], {
+      type: 'text/javascript'
+    })
+    var url = window.URL.createObjectURL(blob)
+    var myWorker = new Worker(url)
+  */
+  var myWorker = new Worker('worker.js')
+  myWorker.onmessage = e => {
+    console.log('上传成功', e.data)
+  }
+  myWorker.postMessage({
+    filename: 'xxx.png',
+    base64: 'xxxxx'
+  })
+</script>
+</html>
