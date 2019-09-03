@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>web animations api</title>
+  <style>
+    @keyframes moves {
+      from {
+        transform: translateX(0)
+      }
+      to {
+        transform: translateX(200px)
+      }
+    }
+
+    #ele {
+      animation: moves 3s linear infinite;
+    }
+  </style>
+</head>
+<body>
+  <div id="ele"></div>
+</body>
+</html>
