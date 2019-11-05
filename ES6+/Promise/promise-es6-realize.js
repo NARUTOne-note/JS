@@ -64,7 +64,7 @@ class Promise {
       reject(err);
     }
   } 
-  then (onFullFilled,onRejected) {
+  then (onFullFilled, onRejected) {
     if (this.status == 'resolved') {
       onFullFilled(this.value)
     }
@@ -78,8 +78,7 @@ class Promise {
       this.onRejectedCallbacks.push(()=> {
           onRejected(this.reason);
       })
-  }
-   
+    }
   }
 }
 
