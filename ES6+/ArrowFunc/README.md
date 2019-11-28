@@ -119,9 +119,14 @@ f.__proto__ === Function.prototype;
 f.prototype
 ```
 
-各种证据表明这个箭头函数的确是一个「函数」，只是没有原型对象，因此也就无法作为构造函数调用`（new f()）`。另外 MDN 提到，**箭头函数内除了 this，还有其他普通函数中常用的变量如 arguments 也是词法绑定的，这些变量在箭头函数调用时是沿着作用域链向上查找的**。
+## 注意
 
-看看规范
-[14.2.16 Runtime Semantics: Evaluation](http://www.ecma-international.org/ecma-262/8.0/index.html#sec-arrow-function-definitions-runtime-semantics-evaluation)
+1、函数体内的 this 对象，就是定义时所在的对象，而不是使用时所在的对象。
 
-里面的 `Note` 提到箭头函数没有对 `this` 进行 `local binding`（本地绑定），这些变量的绑定是在 `lexically enclosing environment` 中进行的，实际上就是 **包含箭头函数定义的函数执行环境中定义** 的，这与我们上文的结论一致。
+2、不可以使用 arguments 对象，该对象在函数体内不存在。如果要用，可以用 rest 参数代替。
+
+3、不可以使用 yield 命令，因此箭头函数不能用作 Generator 函数。
+
+4、不可以使用 new 命令
+
+[MDN 箭头函数](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
