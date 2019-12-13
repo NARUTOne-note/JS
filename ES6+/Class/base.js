@@ -109,3 +109,25 @@ class Foo {
 }
 const foo = new Foo();
 Foo = 'Fol'; // it's ok
+
+
+class Foo {
+	_count = 0;
+	add () {
+		this._count ++;
+	}
+	get () {return this._count;}
+}
+
+var foo = new Foo();
+console.log(foo._count); // 0
+foo.add()
+console.log(foo._count); // 1
+console.log(foo.get()); // 1
+
+
+var foo1 = new Foo();
+console.log(foo1._count); // 0
+foo1.add()
+console.log(foo1._count); // 1
+console.log(foo1.get()); // 1
