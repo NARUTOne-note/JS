@@ -150,7 +150,7 @@ class ColorPoint extends Point {
     // 由于this指向子类实例，所以如果通过super对某个属性赋值，这时super就是this，赋值的属性会变成子类实例的属性
     this.x = 2;
     super.x = 3;
-    console.log(super.x); // undefined
+    console.log(super.x); // 而当读取super.x的时候，读的是Point.prototype.x，所以返回undefined。
     console.log(this.x); // 3
   }
 
