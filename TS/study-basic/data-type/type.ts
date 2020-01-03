@@ -26,11 +26,11 @@ let list2: Array<number> = [1, 2, 3];
 let x: [string, number];
 x = ['hello', 10];
 
-// 枚举
+// 枚举: 类型补充，使用枚举类型可以为一组数值赋予友好的名字。
 
 enum Color {Red, Green, Blue}
 let c: Color = Color.Green;
-
+// 枚举编号，默认从0开始
 enum Color1 {Red = 1, Green, Blue}
 let colorName: string = Color1[2];
 
@@ -51,18 +51,16 @@ function warnUser(): void {
 let u: undefined = undefined;
 let n: null = null;
 
-// never, 永不存在的值的类型
+// never, 永不存在的值的类型；never类型是任何类型的子类型，也可以赋值给任何类型；然而，没有类型是never的子类型或可以赋值给never类型（除了never本身之外）。 即使 any也不可以赋值给never。
 
 // 返回never的函数必须存在无法达到的终点
 function error(message: string): never {
   throw new Error(message);
 }
-
 // 推断的返回值类型为never
 function fail() {
   return error("Something failed");
 }
-
 // 返回never的函数必须存在无法达到的终点
 function infiniteLoop(): never {
   while (true) {
@@ -81,7 +79,7 @@ create(null); // OK
 // create(false); // Error
 create(undefined); // Error
 
-// 类型断言
+// 类型断言。明确知道某个值将会是什么类型
 let someValue: any = "this is a string";
 
 let strLength: number = (<string>someValue).length; // 或 let strLength: number = (someValue as string).length;

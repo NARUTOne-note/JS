@@ -1,17 +1,17 @@
 /**
- * ! generic 泛型
+ * ! genericity 泛型
+ * 使用泛型来创建可重用的组件，一个组件可以支持多种类型的数据
  * *无法创建泛型枚举和泛型命名空间
  */
 
-// * 使用变量T，我们把这个版本的identity函数叫做泛型，因为它可以适用于多个类型。 不同于使用 any，它不会丢失信息
+// * 使用类型变量 T，我们把这个版本的identity函数叫做泛型，因为它可以适用于多个类型。 不同于使用 any，它不会丢失信息
 function identity<T>(arg: T): T {
   return arg;
 }
-// ? 传入所有的参数，包含类型参数
+// ? 传入所有的参数，包含类型参数, 明确的指定了T是string类型
 let output = identity<string>("myString");  // type of output will be 'string'
 
-// ? 类型推论 -- 即编译器会根据传入的参数自动地帮助我们确定T的类型：
-
+// ? 类型推论 -- 即编译器会根据传入的参数自动地帮助我们确定T的类型：没必要使用尖括号（<>）来明确地传入类型
 let output2 = identity("myString");  // type of output will be 'string'
 
 // ! 使用泛型， 必须把这些参数当做是任意或所有类型。
@@ -44,7 +44,7 @@ function identity3<T>(arg: T): T {
 let myIdentity: <U>(arg: U) => U = identity;
 let myIdentity2: {<T>(arg: T): T} = identity; // 带有调用签名的对象字面量来定义泛型函数
 let myIdentity3: GenericIdentityFn = identity;
-let myIdentity4: GenericIdentityFn2<number> = identity;
+let myIdentity4: GenericIdentityFn2<number> = identity; // 具体类型的泛型
 
 // ! 泛型类
 // ?类有两部分：静态部分和实例部分。 泛型类指的是实例部分的类型，所以类的静态属性不能使用这个泛型类型。
@@ -59,7 +59,7 @@ myGenericNumber.add = function(x, y) { return x + y; };
 
 // ! 泛型约束
 
-interface Lengthwise {
+interface Lengthwise { // 限制约束，必须保护length
   length: number;
 }
 
@@ -72,7 +72,6 @@ function loggingIdentity4<T extends Lengthwise>(arg: T): T {
 
 loggingIdentity({length: 10, value: 3});
 
-// ! 泛型中使用类类型
 function getProperty<T>(obj: T, key: string): T {
   return obj[key];
 }
@@ -81,6 +80,8 @@ let x1 = { a: 1, b: 2, c: 3, d: 4 };
 
 getProperty(x1, "a"); // okay
 getProperty(x1, "m"); // error: Argument of type 'm' isn't assignable to 'a' | 'b' | 'c' | 'd'.
+
+// ! 泛型中使用类类型
 
 class BeeKeeper {
   hasMask: boolean;

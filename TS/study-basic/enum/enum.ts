@@ -1,5 +1,6 @@
 /**
  * enum 枚举
+ * TypeScript支持数字的和基于字符串的枚举。
  * * 每个枚举成员都带有一个值，它可以是 常量或 计算出来的。
  */
 
@@ -25,6 +26,7 @@ function respond(recipient: string, message: EResponse): void {
 respond("Princess Caroline", EResponse.Yes);
 
 /**
+ * 不带初始化器的枚举或者被放在第一的位置，或者被放在使用了 ** 数字常量或其它常量初始化了的枚举后面 **
  * enum E {
     A = getSomeValue(),
     B, // error! 'A' is not constant-initialized, so 'B' needs an initializer
@@ -32,6 +34,8 @@ respond("Princess Caroline", EResponse.Yes);
 **/
 
 // ! 字符串枚举，不可自增
+// 在一个字符串枚举里，每个成员都必须用字符串字面量，或另外一个字符串枚举成员进行初始化。
+// 字符串枚举允许你提供一个运行时有意义的并且可读的值，独立于枚举成员的名字。
 
 enum DirectionS {
   Up = "UP",
@@ -48,7 +52,7 @@ enum BooleanLikeHeterogeneousEnum {
 }
 
 // ! 计算，常量
-// ? 不带有初始化器且它之前的枚举成员是一个 数字常量, 第一个成员默认 0
+// ? 不带有初始化器且它之前的枚举成员是一个 数字常量, 第一个成员默认 0, 其他累加1
 enum E1 { X, Y, Z }
 
 enum E2 {
@@ -73,7 +77,7 @@ enum FileAccess {
   G = "123".length
 }
 
-// ! 联合枚举， 枚举成员类型
+// ! 联合枚举， 枚举成员成为类型
 
 enum ShapeKind {
   Circle,
@@ -92,7 +96,7 @@ interface Square {
 
 let c: Circle = {
   kind: ShapeKind.Circle,
-  // kind: ShapeKind.Square,
+  // kind: ShapeKind.Square, // 枚举成员不能相互比较值，成为值
   //    ~~~~~~~~~~~~~~~~ Error!
   radius: 100,
 }

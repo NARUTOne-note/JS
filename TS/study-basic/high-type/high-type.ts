@@ -5,7 +5,7 @@
 // ! 交叉类型, [mixins]
 // * 将多个类型合并为一个类型, 特性也将合并， 
 
-function extend<T, U>(first: T, second: U): T & U {
+function extend<T, U>(first: T, second: U): T & U { // 参数类型不一致，返回类型不一
   let result = <T & U>{};
   for (let id in first) {
       (<any>result)[id] = (<any>first)[id];
@@ -103,7 +103,7 @@ function padLeft2(value: string, padding: string | number) {
   throw new Error(`Expected string or number, got '${padding}'.`);
 }
 
-// instanceof 类型保护
+// instanceof 类型保护：通过构造函数来细化类型的一种方式
 /**
  * 此构造函数的 prototype属性的类型，如果它的类型不为 any的话
  * 构造签名所返回的类型的联合
@@ -148,6 +148,12 @@ if (padder instanceof StringPadder) {
 // * --strictNullChecks标记可以解决此错误
 // * 使用了 --strictNullChecks，可选参数和可选属性会被自动地加上 | undefined:
 
+// let s = "foo";
+// s = null; // 错误, 'null'不能赋值给'string'
+let sn: string | null = "bar";
+sn = null; // 可以
+
+sn = undefined; // error, 'undefined'不能赋值给'string | null'
 class C {
   a: number;
   b?: number;
@@ -165,7 +171,7 @@ function fixed(name: string | null): string {
   function postfix(epithet: string) {
     return name!.charAt(0) + '.  the ' + epithet; // ok
   }
-  name = name || "Bob";
+  name = name || "Bob"; // 短路去除
   return postfix("great");
 }
 
@@ -238,6 +244,9 @@ class UIElement {
 let button = new UIElement();
 button.animate(0, 0, "ease-in");
 // button.animate(0, 0, "uneasy"); // error: "uneasy" is not allowed here
+
+// ! 数字字面量类型
+// TypeScript还具有数字字面量类型。
 
 // ! 可辨识联合
 // * 合并单例类型，联合类型，类型保护和类型别名来创建一个叫做 可辨识联合的高级模式，它也称做 标签联合或 代数数据类型

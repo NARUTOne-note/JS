@@ -28,7 +28,7 @@ let result3 = buildName("Bob", "Adams");  // ah, just right
 function buildName2(firstName = "Will", lastName: string) {
   return firstName + " " + lastName;
 }
-let result4 = buildName2(undefined, "Adams");     // okay and returns "Will Adams"
+let result4 = buildName2(undefined, "Adams");     // okay and returns "Will Adams", 必须明确的传入 undefined值来获得默认值
 
 // ! 剩余参数 ...props [arguments]
 
@@ -103,7 +103,7 @@ let h = new Handler();
 // uiElement.addClickListener(h.onClickBad); // error!
 
 // ! 重载
-/* 
+/* 为同一个函数提供多个函数类型定义来进行函数重载
 ? function pickCard(x): any并不是重载列表的一部分，
 ? 因此这里只有两个重载：一个是接收对象另一个接收数字。 以其它参数调用 pickCard会产生错误。
 */

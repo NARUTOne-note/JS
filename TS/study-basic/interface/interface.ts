@@ -16,16 +16,16 @@ function printLabel(labelledObj: LabelledValue) {
 let myObj = {size: 10, label: "Size 10 Object"};
 printLabel(myObj);
 
-// 非必需
+// 非必需，可选属性；可选属性的好处之一是可以对可能存在的属性进行预定义，好处之二是可以捕获引用了不存在的属性时的错误
 interface SquareConfig { // ?: 非必需
   color?: string;
   width?: number;
 }
 
-interface SquareConfig2 { // 任意数量的其它属性
+interface SquareConfig2 { 
   color?: string;
   width?: number;
-  [propName: string]: any;
+  [propName: string]: any; // 任意数量的其它属性，只要它们不是color和width
 }
 
 // 函数return  {color: string; area: number}
@@ -68,7 +68,7 @@ interface Point {
 let p1: Point = { x: 10, y: 20 };
 // p1.x = 5; // error!
 
-// 只读数组
+// 只读数组  ReadonlyArray<T>类型
 let a: number[] = [1, 2, 3, 4];
 let ro: ReadonlyArray<number> = a;
 // ro[0] = 12; // error!
@@ -79,6 +79,7 @@ a = ro as number[]; // 类型断言重写
 
 /**
  *! 函数接口
+ 函数的参数名不需要与接口里定义的名字相匹配
  */
 
 interface SearchFunc { // 参数：return
@@ -120,6 +121,7 @@ class Dog extends Animal {
   breed: string;
 }
 
+// 可以同时使用两种类型的索引，但是数字索引的返回值必须是字符串索引返回值类型的子类型。 这是因为当使用 number来索引时，JavaScript会将它转换成string然后再去索引对象
 // 错误：使用数值型的字符串索引，有时会得到完全不同的Animal!
 interface NotOkay {
   // [x: number]: Animal; // 报错
@@ -142,6 +144,7 @@ myArray[2] = "Mallory"; // error!
 /**
  * ! 类类型 = 类静态 + 实例
  * ? implements 接口名
+ * 当一个类实现了一个接口时，只对其实例部分进行类型检查。 constructor存在于类的静态部分，所以不在检查的范围内。我们应该直接操作类的静态部分
  */
 interface ClockConstructor { // 构造函数所用
   new (hour: number, minute: number): ClockInterface;

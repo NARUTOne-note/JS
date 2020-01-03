@@ -31,11 +31,13 @@ let greeter2: Greeter = new greeterMaker('message');
 console.log(greeter2.greet());
 
 // 继承
+// 公共，私有与受保护的修饰符
+// 默认为 public
 // 你可以使用 readonly关键字将属性设置为只读的。 只读属性必须在声明时或构造函数里被初始化。
 class Animal {
-  private size: number; // 私有属性
+  private size: number; // 私有属性, 它就不能在声明它的类的外部访问
   private name: string;
-  protected type: string;
+  protected type: string; // protected修饰符与 private修饰符的行为很相似，但有一点不同， protected成员在派生类中仍然可以访问
   readonly id: string;
   readonly numberOfLegs: number = 8;
   public constructor(theName: string, id: string) { 
