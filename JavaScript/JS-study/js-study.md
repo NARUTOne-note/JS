@@ -18,4 +18,4 @@
 
 - [js堆栈与拷贝](http://www.cnblogs.com/jingwhale/p/4884759.html)
 
-- [js Event Loop ](http://mp.weixin.qq.com/s/-OLmK23sfyeirxCxWQyAhA)
+- [js Event Loop](http://mp.weixin.qq.com/s/-OLmK23sfyeirxCxWQyAhA)
