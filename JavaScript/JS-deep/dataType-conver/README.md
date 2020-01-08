@@ -14,6 +14,16 @@
 
 ## js引擎内部实现类型转换的4个抽象操作
 
+### 规则
+
+第一个规则是：在 JS 中只有 3 种类型的转换
+
+- to string
+- to boolean
+- to number
+
+第二，类型转换的逻辑在原始类型和对象类型上是不同的，但是他们都只会转换成上面 3 种类型之一。
+
 ### ToPrimitive(input[, PreferredType])
 
 将input对象转成原始类型值，依赖valueOf()和toString()
@@ -54,7 +64,7 @@
 - boolean:  argument 为 true, return 1; argument 为 false, return 0
 - number: number
 - string: 将字符串中的内容转化为数字（比如"23"->23），如果转化失败则返回NaN（比如"23a"->NaN）
-- Symbol: 抛出 TypeError 异常
+- Symbol: 抛出 TypeError 异常,不管显示、隐式转换
 - object: 先primValue = ToPrimitive(argument, Number)，再对primValue使用ToNumber(primValue)
 
 ### ToString(argument)
@@ -64,7 +74,7 @@
 - boolean:  argument 为 true, return "true"; argument 为 false, return "false"
 - number: 用字符串表示数字
 - string: string
-- Symbol: 抛出 TypeError 异常
+- Symbol: 抛出 TypeError 异常, 只能显示转换 `String(Symbol('symbol'))  // 'Symbol(symbol)'`
 - object: 先primValue = ToPrimitive(argument, Number)，再对primValue使用ToString(primValue)
 
 ## 隐式转换
@@ -90,6 +100,9 @@ console.log(m)   // 'truehelloworld'
 console.log(1 + true) // 2 先Number(true)=> 1,再做加计算，结果为2
 console.log(1 + undefined) // 先Number(undefined) => NaN ,再计算，结果NaN
 console.log(1 + null) // 先Number(null) => 0,再计算，结果为1
+
+String(Symbol('symbol'))  // 'Symbol(symbol)'
+'' + Symbol('symbol')  // TypeError is thrown
 
 ```
 
@@ -126,12 +139,18 @@ console.log('abc' > 'ade') // false，先比较aa，相等，继续比较db，�
 console.log('b'.charCodeAt()) // 98
 console.log('d'.charCodeAt()) // 100
 
+// 不管是显式还是隐式转换都不能将 Symbol 类型转为 number 类型，当试图这样操作时，会抛出错误。
+Number(Symbol('my symbol'))    // TypeError is thrown
++Symbol('123')                 // TypeError is thrown
+
 ```
 
 - 特殊情况
 
+> 当将 == 应用于 null 或 undefined 时，不会发生数值转换。null 只等于 null 或 undefined，不等于其他任何值。
+
 ```js
-console.log(undefined == undefined) // true 
+console.log(undefined == undefined) // true
 console.log(undefined === undefined) // true
 
 console.log(undefined == null) // true undefined是从null派生出来的
@@ -146,7 +165,7 @@ console.log(NaN == NaN) // false NaN与任何数据比较都是NaN
 
 ### to Boolean
 
-- Boolean转换参考上述ToBoolean(argument)说明, 以下这几种数据经过Boolean转换，会转成false，+0、-0、NaN、undefined、null、""、document.all(); 复杂数据类型经过Boolean转换后都是true，如：[]、{}
+- Boolean转换参考上述ToBoolean(argument)说明, 以下这几种数据经过Boolean转换，会转成false，`+0、-0、NaN、undefined、null、""、document.all()`; 复杂数据类型经过Boolean转换后都是true，如：`[]、{}、Symbol()、function(){}`
 - 逻辑非运算符`!`逻辑非运算中，会将数据先做Boolean转换，然后取反
 
 ## 复杂数据
@@ -167,6 +186,7 @@ console.log(a == "[object Object]") // true
 console.log(a.valueOf()) // {}
 console.log({}.toString()) // "[object Object]"，再进行比较
 
+// boolean 在 == 比较中，优先转number
 console.log(![] == 0) // true 解析：空数组转换布尔型是true，取非后为false；false跟数字0比较，布尔型被Number后为0，0 == 0
 
 ```
