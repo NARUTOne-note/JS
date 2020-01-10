@@ -1,5 +1,5 @@
 /**
- * 高级类型
+ * 高级类型 type
  */
 
 // ! 交叉类型, [mixins]
@@ -69,7 +69,7 @@ let pet = getSmallPet();
 pet.layEggs(); // okay
 // pet.swim();    // errors
 
-// 类型断言
+// 类型断言, 就能访问当前断言类型的成员
 if ((<Fish>pet).swim) {
   (<Fish>pet).swim();
 }
@@ -169,7 +169,7 @@ c.b = null; // error, 'null' is not assignable to 'number | undefined'
 
 function fixed(name: string | null): string {
   function postfix(epithet: string) {
-    return name!.charAt(0) + '.  the ' + epithet; // ok
+    return name!.charAt(0) + '.  the ' + epithet; // ok name!
   }
   name = name || "Bob"; // 短路去除
   return postfix("great");
