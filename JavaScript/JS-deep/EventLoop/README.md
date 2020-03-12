@@ -6,6 +6,8 @@
 
 由一道题引发的血案🔥
 
+[参考](https://juejin.im/post/5c3cc981f265da616a47e028#heading-13)
+
 ```js
 //请写出输出内容
 async function async1() {
@@ -68,6 +70,8 @@ setTimeout
 
 (macro)task主要包含：`script(整体代码)、setTimeout、setInterval、I/O、UI交互事件、postMessage、MessageChannel、setImmediate(Node.js 环境)`
 
+settimeout的回调函数放到宏任务队列里，等到执行栈清空以后执行。
+
 ### 微任务
 
 microtask（又称为微任务），**可以理解是在当前 task 执行结束后立即执行的任务。也就是说，在当前task任务后，下一个task之前，在渲染之前**。
@@ -88,5 +92,20 @@ microtask主要包含：`Promise.then、MutaionObserver、process.nextTick(Node.
 
 ![image](./taskRun.png)
 
-1、实际上await是一个让出线程的标志。await后面的表达式会先执行一遍，将await后面的代码加入到microtask中，然后就会跳出整个async函数来执行后面的代码
+1、await 后的值 v 会被转换为 Promise，实际上await是一个让出线程的标志。await后面的表达式会先执行一遍，将await后面的代码加入到microtask中，然后就会跳出整个async函数来执行后面的代码
 2、Promise中的异步体现在then和catch中，所以写在Promise中的代码是被当做同步任务立即执行的。
+3、settimeout的回调函数放到宏任务队列里，等到执行栈清空以后执行。
+4、`new Promise(resolve => resolve(async2()))`，在执行顺序上等价于：
+
+```js
+new Promise((resolve) => {
+    Promise.resolve().then(() => {
+        async2().then(resolve)
+    })
+})
+```
+
+> chrome 73后， `await v` 在语义上将等价于 `Promise.resolve(v)`，而不再是现在的 `new Promise(resolve => resolve(v))`
+
+5、Promise.resolve(v) 不等于 new Promise(r => r(v))，因为如果 v 是一个 Promise 对象，前者会直接返回 v，而后者需要经过一系列的处理（主要是 PromiseResolveThenableJob）
+6、宏任务的优先级是高于微任务的，而原题中的 setTimeout 所创建的宏任务可视为 第二个宏任务，第一个宏任务是这段程序本身
