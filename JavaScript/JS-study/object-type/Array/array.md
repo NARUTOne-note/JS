@@ -2,6 +2,8 @@
 
 > :smile:
 
+[从Chrome V8源码看JavaScript数组](https://juejin.im/post/5e84ae366fb9a03c840d564f?utm_source=gold_browser_extension)
+
 ```js
 var arr = new Array();
 
