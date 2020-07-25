@@ -4,10 +4,13 @@
 
 >demo代码：https://github.com/NARUTOne/DownAndUp.git
 
-> 参考传送门：
-> [http://www.cnblogs.com/voiphudong/p/3284724.html](http://www.cnblogs.com/voiphudong/p/3284724.html)
->[https://scarletsky.github.io/2016/07/03/download-file-using-javascript/#参考资料](https://scarletsky.github.io/2016/07/03/download-file-using-javascript/#参考资料)
-> [https://developer.mozilla.org/zh-CN/docs/Web/API/FileSystem](https://developer.mozilla.org/zh-CN/docs/Web/API/FileSystem)
+
+**参考传送门**：
+
+- [https://juejin.im/post/5e50fa23518825494b3cccd7?utm_source=gold_browser_extension](https://juejin.im/post/5e50fa23518825494b3cccd7?utm_source=gold_browser_extension)
+- [http://www.cnblogs.com/voiphudong/p/3284724.html](http://www.cnblogs.com/voiphudong/p/3284724.html)
+- [https://scarletsky.github.io/2016/07/03/download-file-using-javascript/#参考资料](https://scarletsky.github.io/2016/07/03/download-file-using-javascript/#参考资料)
+- [https://developer.mozilla.org/zh-CN/docs/Web/API/FileSystem](https://developer.mozilla.org/zh-CN/docs/Web/API/FileSystem)
 
 ###引言###
 
