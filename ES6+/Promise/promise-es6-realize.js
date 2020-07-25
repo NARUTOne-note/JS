@@ -43,6 +43,8 @@ class Promise {
     this.onResolvedCallbacks = [];
      // 失败存放法数组
      this.onRejectedCallbacks = [];
+
+     // 使用箭头函数，固定this
     let resolve = (value) => {
       if (this.status == 'pending') {
         this.status = 'resolve';
@@ -63,7 +65,8 @@ class Promise {
     } catch (err) {
       reject(err);
     }
-  } 
+  }
+  // 简易，不合规实现
   then (onFullFilled, onRejected) {
     if (this.status == 'resolved') {
       onFullFilled(this.value)

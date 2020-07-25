@@ -1,17 +1,18 @@
-## JS 黑科技 :ghost:
+# JS 黑科技
+
+> :ghost:
 
 - [黑科技 一](https://zhuanlan.zhihu.com/p/28937831)
 
+## YOU KNOW
 
-### YOU KNOW ?
+![IMG](https://i.imgur.com/8pa1Rvd.png)
 
-![](https://i.imgur.com/8pa1Rvd.png)
-
-```
+```js
 parseInt(0.0000008) === 8 // true
 ```
 
-```
+```js
 [].forEach.call($$("*"),function(a){
     a.style.outline="1px solid #"+(~~(Math.random()*(1<<24))).toString(16)
 })
@@ -19,7 +20,7 @@ parseInt(0.0000008) === 8 // true
 
 :grin:
 
-```
+```js
 try {
     something
 } catch (e) {
@@ -29,11 +30,11 @@ try {
 }
 ```
 
-**匿名自执行**
+**匿名自执行**:
 
 >这么多写法你选择哪一种？我选择死亡。
 
-```
+```js
 ( function() {}() );
 ( function() {} )();
 [ function() {}() ];
@@ -57,18 +58,19 @@ var f = function() {}();
 // ...
 ```
 
-**逗号运算符**
+**逗号运算符**:
 
-```
-var a = 0; 
-var b = ( a++, 99 ); 
+```js
+var a = 0;
+var b = ( a++, 99 );
 console.log(a);  // 1
 console.log(b);  // 99
 ```
 
 **论如何最佳的让两个整数交换数值**
 常规办法：
-```
+
+```js
 var a=1,b=2;
 a += b;
 b = a - b;
@@ -78,15 +80,16 @@ a -= b;
 缺点也很明显，整型数据溢出，对于32位字符最大表示数字是2147483647，如果是2147483645和2147483646交换就失败了。
 
 黑科技办法：
-```
+
+```js
 a ^= b;
 b ^= a;
 a ^= b;
 ```
 
-**arguments 转 数组**
+**arguments 转 数组**:
 
-```
+```js
 var argArray = Array.prototype.slice.call(arguments);
 
 或者ES6：

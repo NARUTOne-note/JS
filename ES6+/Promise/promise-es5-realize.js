@@ -34,8 +34,8 @@
 (1) 一个promise必须具备三种状态(pending|fulfilled(resolved)|rejected)，
   当处于pending状态时，可以转移到fulfilled(resolved)状态或rejected状态，
   处于fulfilled(resolved)状态或rejected状态时，状态不再可变；
-(2) 一个promise必须有then方法，then方法必须接受两个参数：
-(3) then方法必须返回一个promise
+(2) 一个promise必须有then方法，then方法必须接受两个参数：分别对应状态改变时触发的回调
+(3) then方法必须返回一个promise，then 方法可以被同一个 promise 调用多次
  */
 
 function MyPromise(fn) {

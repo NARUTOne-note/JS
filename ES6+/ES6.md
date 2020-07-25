@@ -20,3 +20,4 @@
 ## 小计
 
 - [async / await 替代Promise](https://github.com/xingbofeng/xingbofeng.github.io/issues/16)
+- [Promise/async/Generator实现原理解析](https://juejin.im/post/5e3b9ae26fb9a07ca714a5cc?utm_source=gold_browser_extension)
