@@ -39,3 +39,7 @@ obj1.age = 23;
 - 对象(Object): 类的实例化
 - 属性(Property): 对象具有的数据
 - 方法(Method): 也成消息，用于对象之间传递数据
+
+## 继承
+
+![寄生组合继承](./extend_comps.png)

@@ -35,7 +35,7 @@
  */
   // ! 基于原型链继承
  // ? 原型链继承: 把子类的prototype设置为父类的实例， 父类属性方法复用
-// * 缺点：属性方法被多个子类共享、覆盖, 子类不能传参父类
+// * 缺点：属性方法被多个子类共享、覆盖; 子类不能传参父类; 无法实现多继承
  // 父类
  function Person(name, age) {
   this.name = name || 'person';
@@ -63,15 +63,20 @@ stu.study();
 console.log(stu.name)  // student    --子类覆盖父类的属性
 console.log(stu.age)   // 100       --父类的属性
 console.log(stu.score) // 80      --子类自己的属性
+
  // ! 构造函数继承
 // ? 父类的引用属性不会被共享
 // ? 子类构建实例时可以向父类传递参数
-// * 父类的方法不能复用，子类实例的方法每次都是单独创建的
+// * 父类的方法不能复用，子类实例的方法每次都是单独创建的；构造继承只能继承父类的实例属性和方法，不能继承父类原型的属性和方法
+// * 实例并不是父类的实例，只是子类的实例
  // 父类
 function Person(name) {
   this.name = name || 'person';
   this.hobbies = ['music','reading'];
   this.say = function() {} // 方法，不共享
+}
+Person.prototype.getName = function () {
+  console.log(this.name)
 }
  // 子类
 function Student(name){
@@ -88,6 +93,10 @@ console.log(stu1.hobbies)   // music,reading,basketball
 console.log(stu2.hobbies)   // music,reading
 console.log(stu2.name); // lili
 console.log(stu1.say === stu2.say)   // false
+console.log(stu1.getName()) // getName is not a function
+console.log(stu1 instanceof Student) // true
+console.log(stu1 instanceof Person) // false
+
  // ! 组合继承 = 原型链继承 + 构造函数继承; 常用继承
 // ? 调用两次父类，第二次会覆盖第一次子类原型属性、方法，性能浪费
  // 父类
@@ -102,7 +111,7 @@ function Student(){
 }
 // 继承
 Student.prototype = new Person()  // 原型链继承(继承方法)
-Student.prototype.constructor = Student;
+Student.prototype.constructor = Student; // 修复实例创建标识
  // 实例化
 var stu1 = new Student()
 var stu2 = new Student()
@@ -110,6 +119,32 @@ var stu2 = new Student()
 console.log(stu1.hobbies)           // music,reading,basketball
 console.log(stu2.hobbies)           // music,reading
  console.log(stu1.say == stu2.say)   // true
+
+// ! 升级：寄生组合继承
+
+function Parent (name) {
+  this.name = name
+}
+Parent.prototype.getName = function () {
+  console.log(this.name)
+}
+function Child (name) {
+  this.sex = 'boy'
+  Parent.call(this, name)
+}
+// 与组合继承的区别
+Child.prototype = Object.create(Parent.prototype)
+
+var child1 = new Child('child1')
+
+console.log(child1)
+child1.getName()
+
+console.log(child1.__proto__)
+console.log(Object.create(null))
+console.log(new Object())
+
+
  /**
  * ! Object.create()
  * ECMAScript 5 通过新增 Object.create()方法规范化了原型式继承。
@@ -121,9 +156,10 @@ console.log(stu2.hobbies)           // music,reading
  function objectExtends (o) {
   function F () {}
   F.prototype = o;
+  F.prototype.constructor = F;
   return new F();
 }
- var person = {
+var person = {
   name: 'person',
   friends: ['0', '1', '2']
 };
@@ -135,6 +171,7 @@ newPerson1.name = 'person2';
 newPerson1.friends.push('4');
  console.log(person.name); // person
 console.log(person.friends); // ['0', "1", "2", "3", "4"]
+
  // ! 寄生式继承
 // ?使用原型式继承获得一个目标对象的浅复制，然后增强这个浅复制的能力。
  function createAnother(o) {
@@ -144,6 +181,7 @@ console.log(person.friends); // ['0', "1", "2", "3", "4"]
   };
   return clone;
 }
+
  // ! 寄生组合继承
 // 核心：因为是对父类原型的复制，所以不包含父类的构造函数，也就不会调用两次父类的构造函数造成浪费
  function inheritPrototype(subType, superTyper) {
@@ -166,6 +204,36 @@ console.log(person.friends); // ['0', "1", "2", "3", "4"]
  SubType.prototype.sayAge = function () {
   alert(this.age); 
 }
+
+// ! 混入继承 Object.assign
+
+function Parent (sex) {
+  this.sex = sex
+}
+Parent.prototype.getSex = function () {
+  console.log(this.sex)
+}
+function OtherParent (colors) {
+  this.colors = colors
+}
+OtherParent.prototype.getColors = function () {
+  console.log(this.colors)
+}
+function Child (sex, colors) {
+  Parent.call(this, sex)
+  OtherParent.call(this, colors) // 新增的父类
+  this.name = 'child'
+}
+Child.prototype = Object.create(Parent.prototype)
+Object.assign(Child.prototype, OtherParent.prototype) // 新增的父类原型对象
+Child.prototype.constructor = Child
+
+var child1 = new Child('boy', ['white'])
+child1.getSex()
+child1.getColors()
+console.log(child1)
+
+
  // ! ES6 class 继承, 语法糖
 // ? 而ES6先将父类实例对象的属性和方法，加到this上面（所以必须先调用super方法），然后再用子类的构造函数修改this
  class A {}
@@ -194,3 +262,44 @@ Object.setPrototypeOf(B, A);
   * 由于原生的构造函数（Function，Array等）没有this，
   * 子类无法通过call/apply(this)获得其内部属性，所以在ES5无法继承，ES6实现后可以为原生构造函数封装一些有趣的接口
   */ 
+
+ class Parent {
+  constructor (name) {
+    this.name = name
+  }
+  getName () {
+    console.log(this.name)
+  }
+}
+Parent.prototype.getSex = function () {
+	console.log('boy')
+}
+Parent.getColors = function () {
+  console.log(['white'])
+}
+class Child extends Parent {
+  constructor (name) {
+    super(name)
+    super.getName()
+    // console.log(super) // 这里会报错
+  }
+  instanceFn () {
+    super.getSex()
+  }
+  static staticFn () {
+    super.getColors()
+  }
+}
+var child1 = new Child('child1') // child1
+child1.instanceFn() // boy
+Child.staticFn() // ['white']
+console.log(child1) // Child{ name: 'child1' }
+
+/**
+ * extends后面接着的目标不一定是class，只要是个有prototype属性的函数就可以了
+ * super当成函数调用时，代表父类的构造函数，且返回的是子类的实例，也就是此时super内部的this指向子类。
+ * super当成函数调用时只能在子类的construtor中使用
+ * 在子类的普通函数中super对象指向父类的原型对象
+ * 在子类的静态方法中super对象指向父类
+ * 在子类的constructor中super()就相当于是Parent.constructor.call(this)
+ */
