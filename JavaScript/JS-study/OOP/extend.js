@@ -93,7 +93,7 @@ console.log(stu1.hobbies)   // music,reading,basketball
 console.log(stu2.hobbies)   // music,reading
 console.log(stu2.name); // lili
 console.log(stu1.say === stu2.say)   // false
-console.log(stu1.getName()) // getName is not a function
+console.log(stu1.getName()) // getName is not a function, 不能继承父类原型方法
 console.log(stu1 instanceof Student) // true
 console.log(stu1 instanceof Person) // false
 
