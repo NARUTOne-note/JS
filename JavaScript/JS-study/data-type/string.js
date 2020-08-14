@@ -2,6 +2,11 @@
  * JS-string
  */
 
+var str = 'hello';
+
+str[1] // e
+str.charAt(1) // e
+
 // search(regexp), 搜索指定字符串，并返回第一个匹配项的位置
 
 'hello'.search(/l/); // 2
@@ -19,3 +24,11 @@ str.replace(regexp|substr, newSubStr|function)
 // split
 
 "hellow".split(/[eo]/); // ["h", "ll", "w"]
+
+// indexOf
+
+'hello'.indexOf('e'); // 1
+
+// concat
+
+'hello'.concat('world'); // helloworld

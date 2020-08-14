@@ -37,3 +37,15 @@ Array.from({length: 100}).map((val,index)=> index + 1)
 
 Array.from(Array(100).keys()).map((val)=> val + 1)
 ```
+
+## 类数组转换
+
+```js
+Array.prototype.slice.call(arguments);
+[...arguments]
+Array.from{arguments}
+
+let str = 'hello';
+
+Array.prototype.join.call(str, '-'); // h-e-l-l-o
+```

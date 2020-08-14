@@ -1,4 +1,12 @@
-# Welcome to function
+# function
+
+## 定义
+
+```js
+typeof function foo (a, b) {} === 'function';
+
+foo.length === 2 // 参数个数
+```
 
 - [函数参数传递](http://www.cnblogs.com/youxin/p/3354903.html)
 
