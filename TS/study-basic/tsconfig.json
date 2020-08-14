@@ -1,5 +1,5 @@
 {
-  "extends": "", // extends的值是一个字符串，包含指向另一个要继承文件的路径。在原文件里的配置先被加载，然后被来至继承文件里的配置重写。 如果发现循环引用，则会报错。
+//   "extends": "", // extends的值是一个字符串，包含指向另一个要继承文件的路径。在原文件里的配置先被加载，然后被来至继承文件里的配置重写。 如果发现循环引用，则会报错。
   "compilerOptions": { // 可以被忽略，这时编译器会使用默认值
       "module": "system",
       "noImplicitAny": true,
@@ -11,9 +11,9 @@
       // 注意，自动引入只在你使用了全局的声明（相反于模块）时是重要的。 如果你使用 import "foo"语句，TypeScript仍然会查找node_modules和node_modules/@types文件夹来获取foo包。
       "types" : ["node", "lodash", "express"] // 如果指定了types，只有被列出来的包才会被包含进来; 指定"types": []来禁用自动引入@types包。
   },
-  "files": [ // 指定一个包含相对或绝对文件路径的列表
+//   "files": [ // 指定一个包含相对或绝对文件路径的列表
 
-  ],
+//   ],
   "include": [
       "src/**/*"
   ],
