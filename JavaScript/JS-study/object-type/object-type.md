@@ -16,7 +16,14 @@
 
 ```js
 var obj = new Object();
+var a = new String('abc'); // 返回封装对象
+
+typeof a; // object
+
+Object.prototype.toString.call(a); // [object String]
 ```
+
+`Object.prototype.toString`获取对象内部的`[[Class]]`值
 
 **在对象转换为原始值的时候， valueOf() 的优先级比 toString() 要高。**.
 **parseInt() 只使用 toString() 进行对象到原始值的转换**.

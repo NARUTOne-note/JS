@@ -62,22 +62,27 @@
 ### ToNumber(argument)
 
 - undefined: NaN
-- null: +0
-- boolean:  argument 为 true, return 1; argument 为 false, return 0
-- number: number
+- null: 0
+- boolean:  true => 1; false => 0
+- number: number；0开头的16进制，按十进制转换
 - string: 将字符串中的内容转化为数字（比如"23"->23），如果转化失败则返回NaN（比如"23a"->NaN）
 - Symbol: 抛出 TypeError 异常,不管显示、隐式转换
 - object: 先primValue = ToPrimitive(argument, Number)，再对primValue使用ToNumber(primValue)
+  -- 从ES5开始，使用`Object.create(null)`创建的对象`[[Prototype]]`属性为null，并且没有valueOf()和toString()方法，因此无法进行强制类型转换
 
 ### ToString(argument)
 
 - undefined: "undefined"
 - null: "null"
-- boolean:  argument 为 true, return "true"; argument 为 false, return "false"
-- number: 用字符串表示数字
+- boolean:  true => "true"; false => "false"
+- number: 用字符串表示数字, 大数使用指数形式e
 - string: string
 - Symbol: 抛出 TypeError 异常, 只能显示转换 `String(Symbol('symbol'))  // 'Symbol(symbol)'`
 - object: 先primValue = ToPrimitive(argument, Number)，再对primValue使用ToString(primValue)
+- array: 单元字符串化后 ',' 链接：[1, 2, 3] => '1,2,3'
+- JSON.stringify: 合法格式转string，非法（function， symbol, undefined等）转 null， 保证跨语言使用； 非强制类型转换（显示转换）
+  -- (1) 字符串、数字、布尔值和null的JSON.stringify(..)规则与ToString基本相同。
+  -- (2) 如果传递给JSON.stringify(..)的对象中定义了toJSON()方法，那么该方法会在字符串化前调用，以便将对象转换为安全的JSON值。
 
 ## 隐式转换
 
@@ -122,6 +127,7 @@ console.log(b) // 100
 console.log(a) // 99
 a+= ''
 console.log(c) // 49.5
+console.log(5+ +'3.14'); / 8.14
 ```
 
 - 关系运算符 > < >= <= == != === !===
@@ -147,6 +153,17 @@ Number(Symbol('my symbol'))    // TypeError is thrown
 
 ```
 
+- 日期类型
+
+```js
+var d = new Date();
++d; // 时间戳
+```
+
+### to Boolean
+
+- Boolean转换参考上述ToBoolean(argument)说明, 以下这几种数据经过Boolean转换，会转成false，`+0、-0、NaN、undefined、null、""、document.all()`; 复杂数据类型经过Boolean转换后都是true，如：`[]、{}、Symbol()、function(){}`
+- 逻辑非运算符`!`逻辑非运算中，会将数据先做Boolean转换，然后取反
 - 特殊情况
 
 > 当将 == 应用于 null 或 undefined 时，不会发生数值转换。null 只等于 null 或 undefined，不等于其他任何值。
@@ -164,11 +181,6 @@ console.log(null === null) // true
 console.log(NaN == NaN) // false NaN与任何数据比较都是NaN
 
 ```
-
-### to Boolean
-
-- Boolean转换参考上述ToBoolean(argument)说明, 以下这几种数据经过Boolean转换，会转成false，`+0、-0、NaN、undefined、null、""、document.all()`; 复杂数据类型经过Boolean转换后都是true，如：`[]、{}、Symbol()、function(){}`
-- 逻辑非运算符`!`逻辑非运算中，会将数据先做Boolean转换，然后取反
 
 ## 复杂数据
 
