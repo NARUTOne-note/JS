@@ -99,6 +99,9 @@ a = true
 var m = a + 'helloworld'
 console.log(m)   // 'truehelloworld'
 
+[] + {} // "" + [obejct, object] => [obejct, object]
+{} + [] // +[] => 0
+
 ```
 
 - `+`符号两边有一边是Number型，此时+为算数运算符，则将令一边的数据转成Number型。此处注意空字符串、null以及布尔的false Number之后都是0
@@ -150,6 +153,13 @@ console.log('d'.charCodeAt()) // 100
 // 不管是显式还是隐式转换都不能将 Symbol 类型转为 number 类型，当试图这样操作时，会抛出错误。
 Number(Symbol('my symbol'))    // TypeError is thrown
 +Symbol('123')                 // TypeError is thrown
+
+var a = 'hello world'
+~a.indexOf('lo') // -4 真值
+~a.indexOf('ol') // 0 假值
+
+Math.floor(-49.6) // -50
+~~-49.6 // -49
 
 ```
 
@@ -213,4 +223,6 @@ console.log(![] == 0) // true 解析：空数组转换布尔型是true，取非�
 ```js
 console.log([] == []) // false 数组为引用类型，在堆中存放的是两份不同的数据，所以比较结果不相等
 console.log({} == {}) // false，同理，{}为引用类型，结果不相等
+NaN === NaN // false
++0 === -0 // true
 ```
