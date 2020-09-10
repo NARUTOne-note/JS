@@ -2,6 +2,8 @@
 
 > JS 事件循环, 执行顺序
 
+- [深入解析你不知道的 EventLoop 和浏览器渲染、帧动画、空闲回调（动图演示）](https://juejin.im/post/6844904165462769678?utm_source=gold_browser_extension)
+
 ## 前言
 
 由一道题引发的血案🔥
@@ -46,6 +48,10 @@ promise2
 setTimeout
 */
 ```
+
+## 事件循环
+
+> 为了协调事件，用户交互，脚本，渲染，网络任务等，浏览器必须使用事件循环
 
 ## 任务队列
 
@@ -107,5 +113,28 @@ new Promise((resolve) => {
 
 > chrome 73后， `await v` 在语义上将等价于 `Promise.resolve(v)`，而不再是现在的 `new Promise(resolve => resolve(v))`
 
-5、Promise.resolve(v) 不等于 new Promise(r => r(v))，因为如果 v 是一个 Promise 对象，前者会直接返回 v，而后者需要经过一系列的处理（主要是 PromiseResolveThenableJob）
+5、`Promise.resolve(v)` 不等于 `new Promise(r => r(v))`，因为如果 v 是一个 Promise 对象，前者会直接返回 v，而后者需要经过一系列的处理（主要是 `PromiseResolveThenableJob`）
 6、宏任务的优先级是高于微任务的，而原题中的 setTimeout 所创建的宏任务可视为 第二个宏任务，第一个宏任务是这段程序本身
+
+### requestAnimationFrame
+
+`window.requestAnimationFrame()` 告诉浏览器——你希望执行一个动画，并且要求浏览器在下次重绘之前调用指定的回调函数更新动画。该方法需要传入一个回调函数作为参数，该回调函数会在浏览器下一次重绘之前执行
+
+> 注意：若你想在浏览器下次重绘之前继续更新下一帧动画，那么回调函数自身必须再次调用`window.requestAnimationFrame()`
+
+- 在重新渲染前调用
+- 很可能在宏任务之后不调用。
+
+rAF在浏览器决定渲染之前给你最后一个机会去改变 DOM 属性，然后很快在接下来的绘制中帮你呈现出来，所以这是做流畅动画的不二选择
+
+### requestIdleCallback
+
+`window.requestIdleCallback()`方法将在浏览器的空闲时段内调用的函数排队。这使开发者能够在主事件循环上执行后台和低优先级工作，而不会影响延迟关键事件，如动画和输入响应。函数一般会按先进先调用的顺序执行，然而，如果回调函数指定了执行超时时间timeout，则有可能为了在超时前执行函数而打乱执行顺序。
+
+## 总结
+
+- 事件循环不一定每轮都伴随着重渲染，但是如果有微任务，一定会伴随着微任务执行。
+- 决定浏览器视图是否渲染的因素很多，浏览器是非常聪明的。
+- `requestAnimationFrame`在重新渲染屏幕之前执行，非常适合用来做动画。
+- `requestIdleCallback`在渲染屏幕之后执行，并且是否有空执行要看浏览器的调度，如果你一定要它在某个时间内执行，请使用 timeout参数。
+- `resize`和`scroll`事件其实自带节流，它只在 Event Loop 的渲染阶段去派发事件到 EventTarget 上。
