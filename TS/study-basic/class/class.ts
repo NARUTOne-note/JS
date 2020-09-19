@@ -174,3 +174,53 @@ interface Point3d extends Point {
 }
 
 let point3d: Point3d = {x: 1, y: 2, z: 3};
+
+
+// 类 编译 ES5代码
+
+class Greeters {
+  // 静态属性
+  static cname: string = "Greeter";
+  // 成员属性
+  greeting: string;
+
+  // 构造函数 - 执行初始化操作
+  constructor(message: string) {
+    this.greeting = message;
+  }
+
+  // 静态方法
+  static getClassName() {
+    return "Class name is Greeter";
+  }
+
+  // 成员方法
+  greet() {
+    return "Hello, " + this.greeting;
+  }
+}
+
+let greeters = new Greeters("world");
+
+/**
+ * "use strict";
+var Greeter = (function () {
+    // 构造函数 - 执行初始化操作
+    function Greeter(message) {
+      this.greeting = message;
+    }
+    // 静态方法
+    Greeter.getClassName = function () {
+      return "Class name is Greeter";
+    };
+    // 成员方法
+    Greeter.prototype.greet = function () {
+      return "Hello, " + this.greeting;
+    };
+    // 静态属性
+    Greeter.cname = "Greeter";
+    return Greeter;
+}());
+var greeters = new Greeter("world");
+
+ */

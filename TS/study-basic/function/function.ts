@@ -107,6 +107,21 @@ let h = new Handler();
 ? function pickCard(x): any并不是重载列表的一部分，
 ? 因此这里只有两个重载：一个是接收对象另一个接收数字。 以其它参数调用 pickCard会产生错误。
 */
+type Combinable = string | number
+
+function add(a: number, b: number): number;
+function add(a: string, b: string): string;
+function add(a: number, b: string): string;
+function add(a: string, b: number): string;
+function add(a: Combinable, b: Combinable) {
+  // type Combinable = string | number;
+  if (typeof a === 'string' || typeof b === 'string') {
+    return a.toString() + b.toString();
+  }
+  return a + b;
+}
+
+
 let suits = ["hearts", "spades", "clubs", "diamonds"];
 
 function pickCard(x: {suit: string; card: number; }[]): number;

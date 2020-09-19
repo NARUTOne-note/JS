@@ -5,6 +5,48 @@
 // ! 交叉类型, [mixins]
 // * 将多个类型合并为一个类型, 特性也将合并， 
 
+// ? 同名基础类型属性的合并 => 当前属性类型变为 never
+
+interface X {
+  c: string;
+  d: string;
+}
+
+interface Y {
+  c: number;
+  e: string
+}
+
+type XY = X & Y; // c 的类型为 never
+type YX = Y & X; // c 的类型为 never
+
+let p: XY;
+let q: YX;
+
+
+// ? 同名非基础类型属性的合并 => 成功合并
+
+interface D { d: boolean; }
+interface E { e: string; }
+interface F { f: number; }
+
+interface A { x: D; }
+interface B { x: E; }
+interface C { x: F; }
+
+type ABC = A & B & C;
+
+let abc: ABC = {
+  x: {
+    d: true,
+    e: 'semlinker',
+    f: 666
+  }
+};
+
+console.log('abc:', abc);
+
+
 function extend<T, U>(first: T, second: U): T & U { // 参数类型不一致，返回类型不一
   let result = <T & U>{};
   for (let id in first) {
@@ -32,6 +74,8 @@ class ConsoleLogger implements Loggable {
 var jim = extend(new Person("Jim"), new ConsoleLogger());
 var n = jim.name;
 jim.log();
+
+
 
 // ! 联合类型， number | string | boolean
 
@@ -76,6 +120,15 @@ if ((<Fish>pet).swim) {
 else if ((<Bird>pet).fly) {
   (<Bird>pet).fly();
 }
+
+/**
+ * ! 类型保护
+ * 1、 in 
+ * 2、 typeof
+ * 3、 instanceof
+ * 4、 is
+ * 
+ */
 
 // 类型保护， parameterName is Type
 function isFish(pet: Fish | Bird): pet is Fish {
@@ -154,11 +207,11 @@ let sn: string | null = "bar";
 sn = null; // 可以
 
 sn = undefined; // error, 'undefined'不能赋值给'string | null'
-class C {
+class CC {
   a: number;
   b?: number;
 }
-let c = new C();
+let c = new CC();
 c.a = 12;
 c.a = undefined; // error, 'undefined' is not assignable to 'number'
 c.b = 13;
