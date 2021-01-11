@@ -84,7 +84,7 @@ microtask（又称为微任务），**可以理解是在当前 task 执行结束
 
 所以它的响应速度相比setTimeout（setTimeout是task）会更快，因为无需等渲染。也就是说，在某一个macrotask执行完后，就会将在它执行期间产生的所有microtask都执行完毕（在渲染前）。
 
-microtask主要包含：`Promise.then、MutaionObserver、process.nextTick(Node.js 环境)`
+microtask主要包含：`Promise.then、MutaionObserver、process.nextTick(Node.js 环境)、Object.observe`
 
 ## 运行机制
 
@@ -109,12 +109,22 @@ new Promise((resolve) => {
         async2().then(resolve)
     })
 })
+
+document.body.style = 'background:blue'
+console.log(1);
+Promise.resolve().then(()=>{
+    console.log(2);
+    document.body.style = 'background:pink'
+});
+console.log(3);
+// 直接pink
 ```
 
 > chrome 73后， `await v` 在语义上将等价于 `Promise.resolve(v)`，而不再是现在的 `new Promise(resolve => resolve(v))`
 
 5、`Promise.resolve(v)` 不等于 `new Promise(r => r(v))`，因为如果 v 是一个 Promise 对象，前者会直接返回 v，而后者需要经过一系列的处理（主要是 `PromiseResolveThenableJob`）
 6、宏任务的优先级是高于微任务的，而原题中的 setTimeout 所创建的宏任务可视为 第二个宏任务，第一个宏任务是这段程序本身
+7、微任务和宏任务不在一个任务队列，不在一个任务队列
 
 ### requestAnimationFrame
 
