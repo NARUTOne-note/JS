@@ -39,11 +39,12 @@ test [Bar的实例]
 ```
 
 上面的例子中，test 对象从 Bar.prototype 和 Foo.prototype 继承下来；
-因此， 它能访问 Foo 的原型方法 method。同时，它也能够访问那个定义在原型上的 Foo 实例属性 value。 
+因此， 它能访问 Foo 的原型方法 method。同时，它也能够访问那个定义在原型上的 Foo 实例属性 value。
 需要注意的是 new Bar() 不会创造出一个新的 Foo 实例，而是 重复使用它原型上的那个实例；
 因此，所有的 Bar 实例都会共享相同的 value 属性。
 
-**JS引擎如何查找属性**
+**JS引擎如何查找属性**:
+
 ```js
 function getProperty(obj, prop) {
     if (obj.hasOwnProperty(prop))
@@ -57,7 +58,7 @@ function getProperty(obj, prop) {
 }
 ```
 
-**new**
+**new**:
 
 new 运算符接受一个函数 F 及其参数：new F(arguments...)。这一过程分为三步：
 
@@ -91,6 +92,7 @@ Foo.call(o);
 
 o.someProp;
 ```
+
 它会检查是否存在 someProp 属性。如果没有，它会查找 Object.getPrototypeOf(o).someProp ,如果仍旧没有，
 它会继续查找 Object.getPrototypeOf(Object.getPrototypeOf(o)).someProp ，
 一直查找下去，直到它找到这个属性 或者 Object.getPrototypeOf() 返回 null 。
@@ -180,7 +182,7 @@ var author = Person.new.apply(Person,['Aadit','Shah']) ;
 
 ## 总结大法
 
->完全继承复制，独成一系
+> 完全继承复制，独成一系
 
 ```js
 var deepClone = function(source,target){
