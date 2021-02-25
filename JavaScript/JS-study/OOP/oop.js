@@ -157,8 +157,6 @@ console.log( 'foo.prototype is an Object: ' + (foo.prototype instanceof Object) 
  * 并且这仅在两个类不是父子关系时成立（继承链中，一个类不是继承自其他类）。
  */
 
-
-
 //实例3.0，
 //在 ClassB 构造函数中，用对象冒充继承 ClassA 类的 sColor 属性。
 

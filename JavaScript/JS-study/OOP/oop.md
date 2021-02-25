@@ -1,4 +1,4 @@
-# Welcome to OOP
+# OOP
 
 > JavaScript是不是一门严格意义上的面向对象的语言，它并没有提供类的方法。它是使用原型继承而不是类继承达到面向对象的效果。
 
@@ -48,7 +48,3 @@ obj1.age = 23;
 - 使用`Object.keys()`和`Object.getOwnPropertyNames()`只能获取实例对象自身的属性
 - 可以通过`instance.hasOwnProperty()`方法传入属性名来判断一个属性是不是实例自身的属性
 - 可枚举属性的前提下(属性的`enumerable为true`)
-
-## 继承
-
-![寄生组合继承](./extend_comps.png)
