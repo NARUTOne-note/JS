@@ -100,7 +100,7 @@ var m = a + 'helloworld'
 console.log(m)   // 'truehelloworld'
 
 [] + {} // "" + [obejct, object] => [obejct, object]
-{} + [] // +[] => 0
+{} + [] // +[] => 0， 前面{} 会认为是代码块执行
 
 ```
 
