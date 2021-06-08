@@ -12,7 +12,6 @@
 
 [https://github.com/tc39](https://github.com/tc39)
 
-
 ## Stage
 
 > 每一项新特性要最终纳入 ECMAScript 规范中，需要经历一个由 TC39 拟定的处理过程，称为 TC39 process。一共有五个阶段，每个阶段的变动都需要由 TC39 委员会批准。
