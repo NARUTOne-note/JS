@@ -78,5 +78,6 @@
 
 ### 优文、优站
 
-- js禅意花园：[javascript](https://bonsaiden.github.io/JavaScript-Garden/zh/#intro)
-- Base64编码与解码：[详解Base64编码和解码](https://my.oschina.net/goal/blog/201032)
+- [js禅意花园](https://bonsaiden.github.io/JavaScript-Garden/zh/#intro)
+- [详解Base64编码和解码](https://my.oschina.net/goal/blog/201032)
+- [现代 JavaScript 教程](https://zh.javascript.info/)
