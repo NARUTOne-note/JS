@@ -10,28 +10,28 @@ PS：IE 中的所有 DOM 对象都是以 COM 对象的形式实现的，这意�
 
 > 特性/方法类型/返回类型说明
 
-- nodeName	String	节点的名字；根据节点的类型而定义
-- nodeValue	String	节点的值；根据节点的类型而定义
-- nodeType	Number	节点的类型常量值之一
-- ownerDocument	Document	返回某元素的根元素
-- firstChild	Node	指向在childNodes列表中的第一个节点
-- lastChild	Node	指向在childNodes列表中的最后一个节点
-- childNodes	NodeList	所有子节点的列表
-- previousSibling	Node	返回选定节点的上一个同级节点，若不存在，则返回null
-- nextSibling	Node	返回被选节点的下一个同级节点，若不存在，则返回null
-- hasChildNodes()	Boolean	如果当前元素节点拥有子节点，返回true，否则返回false
-- attributes	NamedNodeMap	返回包含被选节点属性的 NamedNodeMap
-- appendChild(node)	node	将node添加到childNodes的末尾
-- removeChild(node)	node	从childNodes中删除node
-- replaceChild(newnode, oldnode)	Node	将childNodes中的oldnode替换成newnode
-- insertBefore	Node	在已有子节点之前插入新的子节点
+- nodeName: `String`节点的名字；根据节点的类型而定义
+- nodeValue：`String`节点的值；根据节点的类型而定义
+- nodeType：`Number`节点的类型常量值之一
+- ownerDocument：`Document`返回某元素的根元素
+- firstChild：`Node`指向在childNodes列表中的第一个节点
+- lastChild：`Node`指向在childNodes列表中的最后一个节点
+- childNodes：`NodeList`所有子节点的列表
+- previousSibling：`Node`返回选定节点的上一个同级节点，若不存在，则返回null
+- nextSibling：`Node`返回被选节点的下一个同级节点，若不存在，则返回null
+- hasChildNodes：`Boolean`如果当前元素节点拥有子节点，返回true，否则返回false
+- attributes：`NamedNodeMap`返回包含被选节点属性的 NamedNodeMap
+- appendChild(node)：`node`将node添加到childNodes的末尾
+- removeChild(node)：`node`从childNodes中删除node
+- replaceChild(newnode, oldnode)：`Node`将childNodes中的oldnode替换成newnode
+- insertBefore：`Node`在已有子节点之前插入新的子节点
 - firstChild 相当于 childNodes[0]；lastChild 相当于childNodes[box.childNodes.length - 1]。
 
 ### nodeType返回结点的类型
 
 - 元素结点返回1
 - 属性结点返回2
-- 文本结点返回3 
+- 文本结点返回3
 
 ### innerHTML 和 nodeValue
 
@@ -61,12 +61,14 @@ abcbox.innerHTML = "<strong>abc</strong>";//结果为：abc
 
 > PS：IE 浏览器在使用通配符的时候，会把文档最开始的 html 的规范声明当作第一个元素节点。
 
-- document.getElementsByTagName("li");//获取所有 li 元素，返回数组
-- document.getElementsByTagName("li")[0];//获取第一个 li 元素，HTMLLIElement
-- document.getElementsByTagName("li").item(0);//获取第一个 li 元素，HTMLLIElement
-- document.getElementsByTagName("li").length;//获取所有 li 元素的数目
+```js
+document.getElementsByTagName("li"); //获取所有 li 元素，返回数组
+document.getElementsByTagName("li")[0]; //获取第一个 li 元素，HTMLLIElement
+document.getElementsByTagName("li").item(0);//获取第一个 li 元素，HTMLLIElement
+document.getElementsByTagName("li").length;//获取所有 li 元素的数目
+```
 
-### 节点的绝对引用：
+### 节点的绝对引用
 
 - 返回文档的根节点：document.documentElement
 - 返回当前文档中被击活的标签节点：document.activeElement
@@ -81,7 +83,7 @@ abcbox.innerHTML = "<strong>abc</strong>";//结果为：abc
 - 返回第一个子节点：node.firstChild
 - 返回最后一个子节点：node.lastChild
 - 返回同属下一个节点：node.nextSibling
-- 返回同属上一个节点：node.previousSibling 
+- 返回同属上一个节点：node.previousSibling
 
 ### 节点信息
 
@@ -133,7 +135,7 @@ offsetX:IE特有，chrome也支持。鼠标相比较于触发事件的元素的�
 **问题三**：
 scrollTop为滚动条向下移动的距离，所有浏览器都支持document.documentElement。
 
-**其余参照**：http://segmentfault.com/a/1190000002559158#articleHeader11
+[其余参照](http://segmentfault.com/a/1190000002559158#articleHeader11)
 
 **参照表**（+为支持，-为不支持）：
 
@@ -150,11 +152,6 @@ clientX/clientY：W3C+ IE+ Firefox+ Opera+ Safari+ chrome+
 
 screenX/screenY：W3C+ IE+ Firefox+ Opera+ Safari+ chrome+
 ```
-
-**查看下方DEMO**：
-你会发现offsetX在Firefox下是undefined，在chrome和IE则会正常显示。
-
-https://jsfiddle.net/f4am208m/embedded/result/
 
 **getComputedStyle与currentStyle**:
 
@@ -393,14 +390,14 @@ document.getElementById("box").removeAttribute("style");//移除属性
 
 **属性**描述
 
-- dropEffect	设置或获取拖曳操作的类型和要显示的光标类型
-- effectAllowed	设置或获取数据传送操作可应用于该对象的源元素
+- dropEffect设置或获取拖曳操作的类型和要显示的光标类型
+- effectAllowed设置或获取数据传送操作可应用于该对象的源元素
 
 **方法**描述
 
-- clearData	通过 dataTransfer 或 clipboardData 对象从剪贴板删除一种或多种数据格式
-- getData	通过 dataTransfer 或 clipboardData 对象从剪贴板获取指定格式的数据
-- setData	以指定格式给 dataTransfer 或 clipboardData 对象赋予数据
+- clearData通过 dataTransfer 或 clipboardData 对象从剪贴板删除一种或多种数据格式
+- getData通过 dataTransfer 或 clipboardData 对象从剪贴板获取指定格式的数据
+- setData以指定格式给 dataTransfer 或 clipboardData 对象赋予数据
 
 **HTML5拖拽的浏览器支持**:
 Internet Explorer 9、Firefox、Opera 12、Chrome 以及 Safari 5 支持拖放
@@ -411,13 +408,13 @@ Internet Explorer 9、Firefox、Opera 12、Chrome 以及 Safari 5 支持拖放
 
 **事件**描述
 
-- dragstart	拖拽事件开始
-- drag	在拖动操作上
-- dragenter	拖动到目标上，用来决定目标是否接受放置
-- dragover	拖动到目标上，用来决定给用户的反馈
-- drop	放置发生
-- dragleave	拖动离开目标
-- dragend	拖动操作结束
+- dragstart拖拽事件开始
+- drag在拖动操作上
+- dragenter拖动到目标上，用来决定目标是否接受放置
+- dragover拖动到目标上，用来决定给用户的反馈
+- drop放置发生
+- dragleave拖动离开目标
+- dragend拖动操作结束
 
 上述代码的一些浏览器兼容性：
 
@@ -476,6 +473,14 @@ if(navigator.appName.indexOf("Explorer") >-1){
 </script>
 ```
 
+**区别**：
+
+- 首先 innerText 是非标准的，textContent 是标准的
+- innerText 非常容易受 CSS 的影响，textContent 则不会：innerText 只返回可见的文本，而 textContent 返回全文本。
+  比如 "Hello Wold" 文本，用 display: none 把 "Hello" 变成看不见了，那么 innerText 会返回 "World"，而 textContent 返回 "Hello World"。
+- innerText 性能差一点，因为需要等到渲染完了之后通过页面布局信息来获取文本
+- innerText 通过 HTMLElement 拿到，而 textContent 可以通过所有 Node 拿到，获取范围更广一些
+
 **访问XMLHTTPRequest对象**:
 
 ```html
@@ -493,7 +498,7 @@ if(window.XMLHttpRequest){
 FF需要用CSS禁止，IE用JS禁止  
 
 解决方法：  
-IE: `obj.onselectstart = function() {return false;} `
+IE: `obj.onselectstart = function() {return false;}`
 FF: `-moz-user-select:none;`
 
 **三大不冒泡事件**
@@ -515,35 +520,33 @@ IE9-11 wheel deltaY 下40 上-40
 chrome wheel deltaY 下100 上-100  
 
 ### 事件委托方法
-//事件委托方法  
+
+事件委托方法  
 IE：document.body.onload = inject; //Function inject()在这之前已被实现  
-FF：document.body.onload = inject();   
+FF：document.body.onload = inject();
+
 查询操作
 查询通过指的是通过一些特征字符串来找到一组元素，或者判断元素是不是满足字符串。
 
 1. IE6/7不区分id和nam
 在IE6/7下使用getElementById和getElementsByName时会同时返回id或name与给定值相同的元素。由于name通常由后端约定，因此我们在写JS时，应保证id不与name重复。
 
-2. IE6/7不支持getElementsByClassName和querySelectorAll   
+2. IE6/7不支持getElementsByClassName和querySelectorAll
 这两个函数从IE8开始支持的，因此在IE6/7下，我们实际可以用的只有getElementByTagName。
 
-3. IE6/7不支持getElementsByTagName("*")会返回非元素节点    
+3. IE6/7不支持getElementsByTagName("*")会返回非元素节点
 要么不用*，要么自己写个函数过滤一下。
 
-4. IE8下querySelectorAll对属性选择器不友好    
+4. IE8下querySelectorAll对属性选择器不友好
 几乎所有浏览器预定义的属性都有了问题，尽量使用自定义属性或者不用属性选择器。
 
-5. IE8下querySelectorAll不支持伪类    
+5. IE8下querySelectorAll不支持伪类
 有时候伪类是很好用，IE8并不支持，jquery提供的:first、:last、:even、:odd、:eq、:nth、:lt、:gt并不是伪类，我们在任何时间都不要使用它们。
 
 6. IE9的matches函数不能处理不在DOM树上的元素
-只要元素不在dom树上，一定会返回false，实在不行把元素丢在body里面匹配完了再删掉吧，当然了我们也可以自己写匹配函数以避免回流。    
+只要元素不在dom树上，一定会返回false，实在不行把元素丢在body里面匹配完了再删掉吧，当然了我们也可以自己写匹配函数以避免回流。
 to be continued...
 
-## 资料参考：
-http://w3help.org/zh-cn/kb/，
-http://www.zhihu.com/question/29072028
+## 资料参考
 
 - [DOM 详解](http://www.cnblogs.com/season-huang/p/4322451.html)
-
-![](http://i.imgur.com/3vNA0NJ.jpg)
