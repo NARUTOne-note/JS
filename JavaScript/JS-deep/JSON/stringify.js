@@ -1,6 +1,6 @@
 /**
  * JSON 序列化字符串
- * JSON.stringify()
+ * JSON.stringify(value[, replacer [, space]])
  * @link https://juejin.im/post/5decf09de51d45584d238319?utm_source=gold_browser_extension
  */
 
