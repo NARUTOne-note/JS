@@ -84,7 +84,7 @@ microtask（又称为微任务），**可以理解是在当前 task 执行结束
 
 所以它的响应速度相比setTimeout（setTimeout是task）会更快，因为无需等渲染。也就是说，在某一个macrotask执行完后，就会将在它执行期间产生的所有microtask都执行完毕（在渲染前）。
 
-microtask主要包含：`Promise.then、MutaionObserver、process.nextTick(Node.js 环境)、Object.observe`
+microtask主要包含：`Promise.then、 queueMicrotask、MutaionObserver、process.nextTick(Node.js 环境)、Object.observe`
 
 ## 运行机制
 
