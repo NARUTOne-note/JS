@@ -1,17 +1,10 @@
-# 前端学习随记の下载上传篇 —— 上传篇#
+# 前端学习随记&下载上传篇 —— 上传篇
 
 >**闲言：** 上篇我们学习了一些下载的js前端方式，这篇来讲讲上传篇。这也是在项目需求中很常见的O(∩_∩)O。
 
->demo代码：https://github.com/NARUTOne/DownAndUp.git
->参考网址：
->[http://www.ruanyifeng.com/blog/2012/08/file_upload.html](http://www.ruanyifeng.com/blog/2012/08/file_upload.html)
->https://segmentfault.com/a/1190000006600936
->https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader
->https://developer.mozilla.org/zh-CN/docs/Web/API/File
->https://developer.mozilla.org/zh-CN/docs/Web/API/FormData/Using_FormData_Objects
-## 上传の方式 ##
+## 上传的方式
 
-### Form && Input ###
+### Form && Input 
 
 采用传统的form表单或异步ajax上传。至于以前通过iframe来进行异步上传，这里不详细介绍，想了解可以看
 [http://www.ruanyifeng.com/blog/2012/08/file_upload.html](http://www.ruanyifeng.com/blog/2012/08/file_upload.html)。
@@ -93,7 +86,7 @@ function handleSubmit(_this) {
 
 >type属性判断用户的文件类型不太准确，用户会改变后缀名；size可以做大小限制判断。
 
-### HTML5 拖拽操作文件 ###
+### HTML5 拖拽操作文件
 
 ![](http://i.imgur.com/c3IBE1y.png)
 
@@ -158,11 +151,11 @@ dropbox.addEventListener("drop", function(e){
 }, false);
 ```
 
-## FileReader API　##
+## FileReader API
 
 >使用FileReader对象,web应用程序可以异步的读取存储在用户计算机上的文件(或者原始数据缓冲)内容,可以使用File对象或者Blob对象来指定所要处理的文件或数据.其中File对象可以是来自用户在一个< input >元素上选择文件后返回的FileList对象,也可以来自拖放操作生成的 DataTransfer对象,还可以是来自在一个HTMLCanvasElement上执行mozGetAsFile()方法后的返回结果。
 
-### DataURI && URL ###
+### DataURI && URL 
 
 >**URL** 是uniform resource locator的缩写，在web中的每一个可访问资源都有一个URL地址，例如图片，HTML文件，js文件以及style sheet文件，我们可以通过这个地址去download这个资源。其实URL是URI的子集，URI是uniform resource identifier的缩写。
 >**URI** 是用于获取资源，包括其附加的信息的一种协议。附加信息可能是地址，也可能不是地址，如果是地址，那么这时URI就变成URL了。
@@ -266,7 +259,7 @@ Blob对象有两个只读属性：
 - type：二进制数据的MIME类型，全部为小写，如果类型未知，则该值为空字符串。在Ajax操作中，如果xhr.responseType设为blob，接收的就是二进制数据。
 
 
-** blob创建 **
+**blob创建**
 
 1）构成函数
 Blob构造函数，接受两个参数。第一个参数是一个包含实际数据的数组，第二个参数是数据的类型，这两个参数都不是必需的。数组元素可以是任意多个的ArrayBuffer，ArrayBufferView (typed array)， Blob，或者 DOMString对象。例如：
@@ -325,6 +318,7 @@ document.querySelector('input[type="file"]').addEventListener('change', function
   }
 }, false);
 ```
-##终语##
+
+## 终语
+
 >文件上传下载，暂时就讲这么多哈O(∩_∩)O，智商知识技能有限，也就只能模仿学习到这哈。欢迎大家留言交流，互相进步(✿◡‿◡)。
->这里给个上传应用的例子（大神制作）：[前端实现文件的断点续传](http://web.jobbole.com/88384/)。
